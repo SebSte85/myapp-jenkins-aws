@@ -4,7 +4,7 @@ def buildJs() {
     sh 'pwd'
     sh 'ls -l'
     sh 'cd client'
-    sh "pwd"
+    sh 'pwd'
     sh 'ls -l'
     sh 'npm install'
     sh 'npm run build'
