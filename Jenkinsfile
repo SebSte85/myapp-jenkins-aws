@@ -18,9 +18,19 @@ pipeline {
         // Second stage should be a build js stage where a buildJs function in the groovy script is called
         stage('build bundle.js...') {
             steps {
-                script {
-                    gv.buildJs()
+                dir('client') {
+                    sh 'pwd'
+                    sh 'ls -l'
+                    sh 'cd client'
+                    sh 'pwd'
+                    sh 'ls -l'
+                    sh 'npm install'
+                    sh 'npm run build'
+                    sh 'cd ..'
                 }
+                // script {
+                //     gv.buildJs()
+                // }
             }
         }
         // Third stage should the build image stage where a buildImage function is called from the seperate groovy script
