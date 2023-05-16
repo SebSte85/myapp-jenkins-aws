@@ -4,7 +4,7 @@ pipeline {
     agent any
     // Build tool should be javascript specific
     tools {
-        nodejs 'nodejs'
+        nodejs 'nodejs-12.22.12'
     }
     stages {
         // First stage should be an init stage where a seperate groovy script is called
