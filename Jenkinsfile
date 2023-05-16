@@ -18,14 +18,6 @@ pipeline {
         // Second stage should be a build js stage where a buildJs function in the groovy script is called
         stage('build bundle.js...') {
             steps {
-                dir('client') {
-                    echo 'Building bundle.js...'
-                    sh 'pwd'
-                    sh 'ls -l'
-                    sh 'npm install'
-                    sh 'npm run build'
-                    sh 'cd ..'
-                }
                 script {
                     gv.buildJs()
                 }
