@@ -21,9 +21,6 @@ pipeline {
                 dir('client') {
                     sh 'pwd'
                     sh 'ls -l'
-                    sh 'cd client'
-                    sh 'pwd'
-                    sh 'ls -l'
                     sh 'npm install'
                     sh 'npm run build'
                     sh 'cd ..'
