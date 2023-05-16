@@ -1,11 +1,13 @@
 def buildJs() {
     echo 'Building bundle.js...'
     // Run the command 'npm run build' to build the bundle.js file
-    sh "pwd"
-    sh 'cd my-app && cd client'
+    sh 'pwd'
+    sh 'ls -l'
+    sh 'cd client'
+    sh 'ls -l'
     sh 'npm install'
     sh 'npm run build'
-    sh 'cd .. && cd ..'
+    sh 'cd ..'
 }
 
 def buildImage() {
