@@ -19,10 +19,18 @@ pipeline {
         stage('build bundle.js...') {
             steps {
                 dir('client') {
-                    gv.buildJs()
+                    echo 'Building bundle.js...'
+                    sh 'pwd'
+                    sh 'ls -l'
+                    sh 'cd client'
+                    sh 'pwd'
+                    sh 'ls -l'
+                    sh 'npm install'
+                    sh 'npm run build'
+                    sh 'cd ..'
                 }
                 script {
-                    sh 'pwd'
+                    gv.buildJs()
                 }
             }
         }
