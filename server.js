@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
-const port = 5000;
+const port = 3000;
 
 app.use(express.static("client/build"));
 
-app.get("/", (req, res) => {
+app.get("/api/hello", (req, res) => {
   res.json({ message: "Hello from the server!" });
 });
 
