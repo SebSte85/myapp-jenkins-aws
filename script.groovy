@@ -5,7 +5,7 @@ def buildJs() {
     sh 'npm install'
     sh 'npm run build'
     sh 'cd .. && cd ..'
-    }
+}
 
 def buildImage() {
     echo 'Building image...'
@@ -20,3 +20,4 @@ def deployApp() {
     sh "docker push public.ecr.aws/v8z9z5a4/myapp-jenkins-aws:$BUILD_NUMBER"
 }
 
+return this
