@@ -9,4 +9,6 @@ RUN npm install
 
 COPY . /app
 
+WORKDIR /app/client
+
 CMD ["npm", "start"]
