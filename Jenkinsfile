@@ -40,7 +40,6 @@ pipeline {
                     credentialsId: 'AWS-Account'
                 ]]) {
                     sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v8z9z5a4'
-                    echo 'Logged in with AWS...'
                 }
                 script {
                     gv.buildImage()
