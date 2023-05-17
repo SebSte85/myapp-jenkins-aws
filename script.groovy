@@ -14,14 +14,15 @@ def buildJs() {
 
 def buildImage() {
     echo 'Building image...'
+    def currDate = sh(script: 'date +%d-%m-%Y', returnStdout: true).trim()
     sh 'aws --version'
-    sh "docker build -t $JOB_NAME:$BUILD_NUMBER ."
-    sh "docker tag $JOB_NAME:$BUILD_NUMBER public.ecr.aws/v8z9z5a4/myapp-jenkins-aws:$BUILD_NUMBER"
+    sh "docker build -t $JOB_NAME:$BUILD_NUMBER-${currDate} ."
+    sh "docker tag $JOB_NAME:$BUILD_NUMBER public.ecr.aws/v8z9z5a4/myapp-jenkins-aws:$BUILD_NUMBER-${currDate}"
 }
 
 def deployApp() {
     echo 'Deploying app...'
-    sh "docker push public.ecr.aws/v8z9z5a4/myapp-jenkins-aws:$BUILD_NUMBER"
+    sh "docker push public.ecr.aws/v8z9z5a4/myapp-jenkins-aws:$BUILD_NUMBER-${currDate}"
 }
 
 return this
