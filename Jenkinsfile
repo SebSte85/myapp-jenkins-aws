@@ -50,7 +50,7 @@ pipeline {
         stage('deploy app...') {
             steps {
                 script {
-                    def dockerCmd = "docker run -d -p 3080:3080 public.ecr.aws/v8z9z5a4/myapp-jenkins-aws:$BUILD_NUMBER"
+                    def dockerCmd = "docker run -d -p 3080:3000 public.ecr.aws/v8z9z5a4/myapp-jenkins-aws:$BUILD_NUMBER"
                     sshagent(['ec-server-key']) {
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@3.122.101.161 ${dockerCmd}"
                         gv.deployApp()
