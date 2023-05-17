@@ -1,4 +1,4 @@
-//Build a basic Dockerfile for this project
+## Build a basic Dockerfile for this project
 FROM node:12.18.3-alpine3.12
 
 WORKDIR /app
