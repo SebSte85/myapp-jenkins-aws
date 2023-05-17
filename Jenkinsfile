@@ -7,7 +7,7 @@ pipeline {
         nodejs 'nodejs-12.22.12'
     }
     stages {
-        // First stage should be an init stage where a seperate groovy script is called
+        // First stage should be an init stage where a seperate groovy script is loaded
         stage('init...') {
             steps {
                 script {
@@ -25,14 +25,23 @@ pipeline {
                     sh 'npm run build'
                     sh 'cd ..'
                 }
-                // script {
-                //     gv.buildJs()
-                // }
+            // script {
+            //     gv.buildJs()
+            // }
             }
         }
         // Third stage should the build image stage where a buildImage function is called from the seperate groovy script
         stage('build image...') {
             steps {
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
+                    credentialsId: 'AWS-Account'
+                ]]) {
+                    sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v8z9z5a4'
+                    echo 'Logged in with AWS...'
+                }
                 script {
                     gv.buildImage()
                 }
@@ -42,7 +51,11 @@ pipeline {
         stage('deploy app...') {
             steps {
                 script {
-                    gv.deployApp()
+                    def dockerCmd = "docker run -d -p 3080:3080 public.ecr.aws/v8z9z5a4/myapp-jenkins-aws:$BUILD_NUMBER"
+                    sshagent(['ec-server-key']) {
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@3.122.101.161 ${dockerCmd}"
+                        gv.deployApp()
+                    }
                 }
             }
         }
