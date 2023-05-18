@@ -51,12 +51,13 @@ pipeline {
             steps {
                 script {
                     echo 'Removing old app...'
-                    sh '''
-                        pid=$(lsof -t -i:3080)
-                        if [[ -n $pid ]]; then
-                            kill $pid
-                        fi
-                    '''
+                    def pid = sh(script: 'lsof -t -i:3080', returnStdout: true).trim()
+                    if (pid) {
+                        echo "Terminating the app with PID: $pid"
+                        sh "kill $pid"
+                    } else {
+                        echo 'No app found running on port 3080'
+                    }
                     def dockerCmd = "docker run -d -p 3080:3000 public.ecr.aws/v8z9z5a4/$JOB_NAME:$BUILD_NUMBER"
                     sshagent(['ec2-server-key']) {
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@3.68.108.18 ${dockerCmd}"
