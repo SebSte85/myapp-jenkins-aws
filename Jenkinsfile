@@ -50,6 +50,8 @@ pipeline {
         stage('deploy app...') {
             steps {
                 script {
+                    echo 'Removing old app...'
+                    sh 'lsof -ti tcp:3080 | xargs kill -9'
                     def dockerCmd = "docker run -d -p 3080:3000 public.ecr.aws/v8z9z5a4/$JOB_NAME:$BUILD_NUMBER"
                     sshagent(['ec2-server-key']) {
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@3.68.108.18 ${dockerCmd}"
