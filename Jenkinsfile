@@ -53,7 +53,7 @@ pipeline {
                     def currDate = sh(script: 'date +%d-%m-%Y', returnStdout: true).trim()
                     def dockerCmd = "docker run -d -p 3080:3000 public.ecr.aws/v8z9z5a4/$JOB_NAME:$BUILD_NUMBER-${currDate}"
                     sshagent(['ec2-server-key']) {
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@3.122.101.161 ${dockerCmd}"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@3.68.108.18 ${dockerCmd}"
                         gv.deployApp()
                     }
                 }
