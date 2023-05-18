@@ -20,6 +20,8 @@ def buildImage() {
 }
 
 def deployApp() {
+    echo 'Removing old app...'
+    sh 'lsof -ti tcp:3080 | xargs kill -9'
     echo 'Deploying app...'
     sh "docker push public.ecr.aws/v8z9z5a4/$JOB_NAME:$BUILD_NUMBER"
 }
