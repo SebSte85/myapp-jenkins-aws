@@ -24,4 +24,9 @@ def deployApp() {
     sh "docker push public.ecr.aws/v8z9z5a4/$JOB_NAME:$BUILD_NUMBER"
 }
 
+def cleanUp() {
+    echo 'Cleaning up...'
+    sh 'docker system prune -af'
+}
+
 return this

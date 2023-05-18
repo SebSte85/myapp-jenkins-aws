@@ -58,5 +58,13 @@ pipeline {
                 }
             }
         }
+        // In the fifth step clean up unused items
+        stage('clean up...') {
+            steps {
+                script {
+                    gv.cleanUp()
+                }
+            }
+        }
     }
 }
