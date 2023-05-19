@@ -54,6 +54,7 @@ pipeline {
         // In the fifth stage the app is deployed using the external deployApp method
         stage('deploy app...') {
             steps {
+                script {
                     def dockerCmd = "docker run -d -p 3080:3000 --name nodejsapp public.ecr.aws/v8z9z5a4/$JOB_NAME:$BUILD_NUMBER"
                     sshagent(['ec2-server-key']) {
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@3.68.108.18 ${dockerCmd}"
@@ -61,6 +62,7 @@ pipeline {
                     }
                 }
             }
+        }
         // In the sixth step clean up unused items
         stage('clean up...') {
             steps {
