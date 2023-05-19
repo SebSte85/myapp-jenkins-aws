@@ -76,6 +76,7 @@ pipeline {
         always {
             script {
                     gv.cleanUp()
+                    emailext body: 'Woop Woop', subject: 'Email Plugin', to: 'sebby.stem@googlemail.com'
             }
         }
     }
