@@ -78,11 +78,11 @@ pipeline {
                     gv.cleanUp()
             }
         }
-        failed {
-            emailext body: 'Woop Woop', subject: 'Execution FAILED', to: 'sebby.stem@googlemail.com'
+        failure {
+            emailext body: 'The pipeline failed due to...', subject: 'Execution FAILED', to: 'sebby.stem@googlemail.com'
         }
         success {
-            emailext body: 'Woop Woop', subject: 'Execution SUCCESS', to: 'sebby.stem@googlemail.com'
+            emailext body: 'The pipeline failed due to...', subject: 'Execution SUCCESS', to: 'sebby.stem@googlemail.com'
         }
     }
 }
