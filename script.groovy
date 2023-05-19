@@ -25,7 +25,7 @@ def checkPort() {
     def containerRunning = sh(script: 'docker ps -q -f name=nodejs -f expose=3080', returnStatus: true) == 0
     echo containerRunning.toString()
 
-    if (appRunning) {
+    if (containerRunning) {
         // Stop the existing app running on port 3080
         sh 'docker stop nodejsapp'
         sh 'docker rm nodejsapp'
