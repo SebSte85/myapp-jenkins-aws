@@ -19,6 +19,13 @@ def buildImage() {
     sh "docker tag $JOB_NAME:$BUILD_NUMBER public.ecr.aws/v8z9z5a4/$JOB_NAME:$BUILD_NUMBER"
 }
 
+def checkPort() {
+    echo 'Checking usage of needed port...'
+    // Check if an app is running on port 3080 and if so terminate it
+    sh 'docker stop nodejsapp || true'
+    sh 'docker rm nodejsapp || true'
+}
+
 def deployApp() {
     echo 'Deploying app...'
     sh "docker push public.ecr.aws/v8z9z5a4/$JOB_NAME:$BUILD_NUMBER"
