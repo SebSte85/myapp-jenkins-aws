@@ -63,12 +63,11 @@ pipeline {
                 }
             }
         }
-        // In the sixth stage the soapui tests are run
-        stage('soap tests...') {
+        // In the sixth stage the soapui tests are run inside a try catch block
+        stage('run soap tests...') {
             steps {
                 script {
-                    def soapuiCmd = "docker run --rm -v ${pwd()}/soapui-project:/opt/soapui-project -v ${pwd()}/reports:/opt/reports -v ${pwd()}/soapui-settings:/opt/soapui-settings --net=host --entrypoint /opt/SmartBear/SoapUI-5.6.0/bin/testrunner.sh smartbear/readyapi-soapui-ng -s\"${params.soapuiProject}\" -c\"${params.soapuiTestCase}\" -r -j -f${params.soapuiReportFormat} -R\"TestSuite 1\" -Penv=${params.soapuiEnvironment}"
-                    sh "${soapuiCmd}"
+                    gv.runSoapTests()
                 }
             }
         }

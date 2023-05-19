@@ -38,6 +38,18 @@ def deployApp() {
     sh "docker push public.ecr.aws/v8z9z5a4/$JOB_NAME:$BUILD_NUMBER"
 }
 
+def runSoapTests() {
+    echo 'Running soap tests...'
+    // Run the soapui tests
+    try {
+        sh '/opt/SmartBear/SoapUI-5.6.0/bin/testrunner.sh Tutorial-soapui-project.xml'
+    } catch (err) {
+        echo 'Soap tests failed!'
+        currentBuild.result = 'FAILURE'
+        throw err
+    }
+}
+
 def cleanUp() {
     echo 'Cleaning up...'
     sh 'docker system prune -af'
