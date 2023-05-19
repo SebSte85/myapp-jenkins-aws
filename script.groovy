@@ -22,8 +22,8 @@ def buildImage() {
 def checkPort() {
     echo 'Checking usage of needed port 3080...'
     // Check if an app is running on port 3080
-    def appRunning = sh(script: 'lsof -i :3000', returnStatus: true) == 0
-    echo appRunning.toString()
+    def containerRunning = sh(script: 'docker ps -q -f name=nodejs -f expose=3080', returnStatus: true) == 0
+    echo containerRunning.toString()
 
     if (appRunning) {
         // Stop the existing app running on port 3080
