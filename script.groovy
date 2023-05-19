@@ -22,7 +22,7 @@ def buildImage() {
 def checkPort() {
     echo 'Checking usage of needed port 3080...'
     // Check if an app is running on port 3080
-    def appRunning = sh(script: 'lsof -i :3080', returnStatus: true) == 0
+    def appRunning = sh(script: 'lsof -i :3000', returnStatus: true) == 0
     echo appRunning.toString()
 
     if (appRunning) {
