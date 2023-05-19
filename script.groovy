@@ -29,7 +29,6 @@ def checkPort() {
         // Stop the existing app running on port 3080
         sh 'docker stop nodejsapp'
         sh 'docker rm nodejsapp'
-        echo 'Waiting for app to stop and be removed...'
         sleep 5
     }
 }
