@@ -3,7 +3,7 @@ def buildImage() {
     echo 'Building image...'
     try {
         sh 'aws --version'
-        sh "docker build -t $JOB_NAME:$BUILD_NUMBER ."
+        sh "docker build -t $JOB_NAME:$BUILD_NUMBsER ."
         sh "docker tag $JOB_NAME:$BUILD_NUMBER public.ecr.aws/v8z9z5a4/$JOB_NAME:$BUILD_NUMBER"
     } catch (err) {
         echo 'Building image failed!'
