@@ -36,6 +36,8 @@ pipeline {
                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
                     credentialsId: 'AWS-Account'
                 ]]) {
+                    awsAccessKeyId = env.AWS_ACCESS_KEY_ID
+                    awsSecretAccessKey = env.AWS_SECRET_ACCESS_KEY
                     sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v8z9z5a4'
                 }
                 script {
@@ -73,6 +75,10 @@ pipeline {
         }
     }
     post {
+        environment {
+                AWS_ACCESS_KEY_ID = awsAccessKeyId
+                AWS_SECRET_ACCESS_KEY = awsSecretAccessKey
+            }
         always {
             script {
                     gv.cleanUp()
