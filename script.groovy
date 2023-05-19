@@ -23,6 +23,7 @@ def checkPort() {
     echo 'Checking usage of needed port 3080...'
     // Check if an app is running on port 3080
     def appRunning = sh(script: 'lsof -i :3080', returnStatus: true) == 0
+    echo appRunning
 
     if (appRunning) {
         // Stop the existing app running on port 3080
