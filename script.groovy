@@ -21,9 +21,14 @@ def buildImage() {
 
 def checkPort() {
     echo 'Checking usage of needed port...'
-    // Check if an app is running on port 3080 and if so terminate it
-    sh 'docker stop nodejsapp || true'
-    sh 'docker rm nodejsapp || true'
+    // Check if an app is running on port 3080
+    def appRunning = sh(script: 'lsof -i :3080', returnStatus: true) == 0
+
+    if (appRunning) {
+        // Stop the existing app running on port 3080
+        sh 'docker stop nodejsapp'
+        sh 'docker rm nodejsapp'
+    }
 }
 
 def deployApp() {

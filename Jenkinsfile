@@ -25,9 +25,6 @@ pipeline {
                     sh 'npm run build'
                     sh 'cd ..'
                 }
-            // script {
-            //     gv.buildJs()
-            // }
             }
         }
         // Third stage should the build image stage where a buildImage function is called from the seperate groovy script
@@ -64,7 +61,6 @@ pipeline {
                     }
                 }
             }
-        }
         // In the sixth step clean up unused items
         stage('clean up...') {
             steps {
