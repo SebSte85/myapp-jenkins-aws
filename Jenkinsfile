@@ -71,12 +71,11 @@ pipeline {
                 }
             }
         }
-        // In the seventh step clean up unused items
-        stage('clean up...') {
-            steps {
-                script {
+    }
+    post {
+        always {
+            script {
                     gv.cleanUp()
-                }
             }
         }
     }
