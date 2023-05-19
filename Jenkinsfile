@@ -79,10 +79,10 @@ pipeline {
             }
         }
         failure {
-            emailext body: 'The pipeline failed due to...', subject: 'Execution FAILED', to: 'sebby.stem@googlemail.com'
+            emailext body: 'The pipeline execution failed due to...', subject: "Job '${JOB_NAME} ${JOB_BUILD_NUMBER} execution FAILED'", to: 'sebby.stem@googlemail.com'
         }
         success {
-            emailext body: 'The pipeline failed due to...', subject: 'Execution SUCCESS', to: 'sebby.stem@googlemail.com'
+            emailext body: 'The pipeline execution was successfull...', subject: "Job '${JOB_NAME} ${JOB_BUILD_NUMBER} execution was a SUCCESS'", to: 'sebby.stem@googlemail.com'
         }
     }
 }
