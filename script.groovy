@@ -8,6 +8,7 @@ def buildImage() {
     } catch (err) {
         echo 'Building image failed!'
         currentBuild.result = 'FAILURE'
+        env.ERROR_MESSAGE = err.getMessage()
         throw err
     }
 }
@@ -28,6 +29,7 @@ def checkPort() {
     } catch (err) {
         echo 'Freeing up port failed!'
         currentBuild.result = 'FAILURE'
+        env.ERROR_MESSAGE = err.getMessage()
         throw err
     }
 }
@@ -40,6 +42,7 @@ def deployApp() {
     } catch (err) {
         echo 'Deploying app failed!'
         currentBuild.result = 'FAILURE'
+        env.ERROR_MESSAGE = err.getMessage()
         throw err
     }
 }
@@ -52,6 +55,7 @@ def runSoapTests() {
     } catch (err) {
         echo 'Soap tests failed!'
         currentBuild.result = 'FAILURE'
+        env.ERROR_MESSAGE = err.getMessage()
         throw err
     }
 }
@@ -63,6 +67,7 @@ def cleanUp() {
     } catch (err) {
         echo 'Cleaning up failed!'
         currentBuild.result = 'FAILURE'
+        env.ERROR_MESSAGE = err.getMessage()
         throw err
     }
 }
