@@ -93,6 +93,9 @@ pipeline {
                 def jiraPayload = """
                 {
                     "fields": {
+                        "assignee": {
+                            "id": "605aefb29620b5006afbc585"
+                        },
                         "project": {
                             "key": "${jiraProjectKey}"
                         },
@@ -106,7 +109,7 @@ pipeline {
                 """
 
                 // Create Jira issue using REST API
-                sh "curl -u sebastian.stemmer@dig-it-up.de:aZyD74Oll2WOXwfbYULn -X POST --header 'Content-Type: application/json' --data '${jiraPayload}' ${jiraBaseUrl}/rest/api/2/issue/"
+                sh "curl -u sebastian.stemmer@dig-it-up.de:aZyD74Oll2WOXwfbYULn -X POST --header 'Content-Type: application/json' --data '${jiraPayload}' ${jiraBaseUrl}/rest/api/3/issue/"
             }
         }
         success {
