@@ -64,7 +64,6 @@ def cleanUp() {
     echo 'Cleaning up...'
     try {
         sh 'docker system prune -af'
-        sh """aws ecr batch-delete-image --repository-name newapp-jenkins-aws --image-ids \$(aws ecr list-images --repository-name newapp-jenkins-aws --query 'imageIds[?(@ != `${BUILD_NUMBER}`)]' --output json)"""
     } catch (err) {
         echo 'Cleaning up failed!'
         currentBuild.result = 'FAILURE'

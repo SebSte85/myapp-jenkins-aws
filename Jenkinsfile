@@ -6,7 +6,21 @@ pipeline {
     tools {
         nodejs 'nodejs-12.22.12'
     }
+
+    environment {
+        AWS_ACCESS_KEY_ID = ''
+        AWS_SECRET_ACCESS_KEY = ''
+    }
+
     stages {
+        withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
+                    credentialsId: 'AWS-Account'
+                ]]) {
+                    echo 'Credentials loaded...'
+                }
         // First stage should be an init stage where a seperate groovy script is loaded
         stage('init...') {
             steps {
@@ -30,17 +44,8 @@ pipeline {
         // Third stage should the build image stage where a buildImage function is called from the seperate groovy script
         stage('build image...') {
             steps {
-                withCredentials([[
-                    $class: 'AmazonWebServicesCredentialsBinding',
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-                    credentialsId: 'AWS-Account'
-                ]]) {
-                    awsAccessKeyId = env.AWS_ACCESS_KEY_ID
-                    awsSecretAccessKey = env.AWS_SECRET_ACCESS_KEY
-                    sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v8z9z5a4'
-                }
                 script {
+                    sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v8z9z5a4'
                     gv.buildImage()
                 }
             }
@@ -75,10 +80,6 @@ pipeline {
         }
     }
     post {
-        environment {
-                AWS_ACCESS_KEY_ID = awsAccessKeyId
-                AWS_SECRET_ACCESS_KEY = awsSecretAccessKey
-            }
         always {
             script {
                     gv.cleanUp()
