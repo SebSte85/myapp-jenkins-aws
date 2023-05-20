@@ -6,6 +6,10 @@ pipeline {
     tools {
         nodejs 'nodejs-12.22.12'
     }
+    environment {
+        AWS_ACCESS_KEY_ID = credentials('AWS-Account').accessKey
+        AWS_SECRET_ACCESS_KEY = credentials('AWS-Account').secretKey
+    }
     stages {
         // First stage should be an init stage where a seperate groovy script is loaded
         stage('init...') {
@@ -30,19 +34,14 @@ pipeline {
         // Third stage should the build image stage where a buildImage function is called from the seperate groovy script
         stage('build image...') {
             steps {
-                withCredentials([[
-                    $class: 'AmazonWebServicesCredentialsBinding',
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-                    credentialsId: 'AWS-Account'
-                ]]) {
-                    sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v8z9z5a4'
-                }
+
                 script {
+                    sh "aws ecr-public get-login-password --region us-east-1 | docker login --username $AWS_ACCESS_KEY_ID --password-stdin $AWS_SECRET_ACCESS_KEY@public.ecr.aws/v8z9z5a4"
                     gv.buildImage()
                 }
             }
         }
+    }
         // Fourth stage should check if an app is running on port 3080 and if so terminate it
         stage('check app...') {
             steps {
@@ -71,7 +70,7 @@ pipeline {
                 }
             }
         }
-    }
+}
     post {
         always {
             script {
