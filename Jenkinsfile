@@ -79,7 +79,35 @@ pipeline {
             }
         }
         failure {
-            emailext body: "The pipeline execution failed due to...${env.ERROR_MESSAGE}", subject: "Job '${JOB_NAME} ${BUILD_NUMBER} execution FAILED'", to: 'sebby.stem@googlemail.com'
+            script {
+                emailext body: "The pipeline execution failed due to...${env.ERROR_MESSAGE}", subject: "Job '${JOB_NAME} ${BUILD_NUMBER} execution FAILED'", to: 'sebby.stem@googlemail.com'
+
+                // Jira configuration
+                def jiraBaseUrl = 'https://digitup.atlassian.net/'
+                def jiraProjectKey = 'TJCAO'
+                def jiraIssueType = 'Bug'
+                def jiraSummary = "Pipeline failed for ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
+                def jiraDescription = "Pipeline failed for ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
+
+                // Create Jira issue payload
+                def jiraPayload = """
+                {
+                    "fields": {
+                        "project": {
+                            "key": "${jiraProjectKey}"
+                        },
+                        "summary": "${jiraSummary}",
+                        "description": "${jiraDescription}",
+                        "issuetype": {
+                            "name": "${jiraIssueType}"
+                        }
+                    }
+                }
+                """
+
+                // Create Jira issue using REST API
+                sh "curl -u sebastian.stemmer@dig-it-up.de:aZyD74Oll2WOXwfbYULn -X POST --header 'Content-Type: application/json' --data '${jiraPayload}' ${jiraBaseUrl}/rest/api/2/issue/"
+            }
         }
         success {
             emailext body: 'The pipeline execution was successfull...', subject: "Job '${JOB_NAME} ${BUILD_NUMBER} execution was a SUCCESS'", to: 'sebby.stem@googlemail.com'
