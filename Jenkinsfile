@@ -24,7 +24,12 @@ pipeline {
                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
                     credentialsId: 'AWS-Account'
                 ]]) {
-                        echo 'Credentials loaded...'
+                        script {
+                            env.AWS_ACCESS_KEY_ID = env.AWS_ACCESS_KEY_ID
+                            env.AWS_SECRET_ACCESS_KEY = env.AWS_SECRET_ACCESS_KEY
+
+                            echo 'Credentials loaded...'
+                        }
                 }
                 }
             }
