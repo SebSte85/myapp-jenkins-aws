@@ -13,19 +13,19 @@ pipeline {
     }
 
     stages {
-        withCredentials([[
-                    $class: 'AmazonWebServicesCredentialsBinding',
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-                    credentialsId: 'AWS-Account'
-                ]]) {
-                    echo 'Credentials loaded...'
-                }
         // First stage should be an init stage where a seperate groovy script is loaded
         stage('init...') {
             steps {
                 script {
                     gv = load 'script.groovy'
+                    withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
+                    credentialsId: 'AWS-Account'
+                ]]) {
+                        echo 'Credentials loaded...'
+                }
                 }
             }
         }
