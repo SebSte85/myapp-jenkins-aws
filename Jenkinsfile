@@ -6,11 +6,21 @@ pipeline {
     tools {
         nodejs 'nodejs-12.22.12'
     }
-    environment {
-        AWS_ACCESS_KEY_ID = credentials('AWS-Account').accessKey
-        AWS_SECRET_ACCESS_KEY = credentials('AWS-Account').secretKey
-    }
     stages {
+        stage('Get AWS Credentials') {
+            steps {
+                withCredentials([[
+                $class: 'AmazonWebServicesCredentialsBinding',
+                accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
+                credentialsId: 'AWS-Account'
+            ]]) {
+                    echo 'AWS credentials fetched'
+                    env.AWS_ACCESS_KEY_ID = sh(script: 'echo $AWS_ACCESS_KEY_ID', returnStdout: true).trim()
+                    env.AWS_SECRET_ACCESS_KEY = sh(script: 'echo $AWS_SECRET_ACCESS_KEY', returnStdout: true).trim()
+            }
+            }
+        }
         // First stage should be an init stage where a seperate groovy script is loaded
         stage('init...') {
             steps {
