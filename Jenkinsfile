@@ -89,7 +89,7 @@ pipeline {
                 def jiraSummary = "Pipeline failed for ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
                 // def jiraDescription = "Pipeline failed for ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
                 def jiraAssignee = '605aefb29620b5006afbc585'
-                def base64token = 'c2ViYXN0aWFuLnN0ZW1tZXJAZGlnLWl0LXVwLmRlOmFaeUQ3NE9sbDJXT1h3ZmJZVUxu'
+                def base64token = 'c2ViYXN0aWFuLnN0ZW1tZXJAZGlnLWl0LXVwLmRlOkFUQVRUM3hGZkdGMG5uY3lJT0R5UE50a1Y0eEY5Q3FkNGNqQm9mNGRmeWpoZXMwb1h4N2hWM1RDSjNVV2FLUEd6UENRZUdGTlEwMllIR1BrU1d6WEtsbF9sVGt6RUxGWEU2cjJoa090VlJCekVhbW5nTERreVdGRjdkQUt1QzM2dHNFQWF1Q3I1SHAwd2w2ZWt3QnF5ODVYUVpIR2R6dTZPemE2Zms4c1cwMGdYdzdFT1Fab2t2cz03QjQ1QjdCMw=='
 
                 // Create Jira issue payload
                 def jiraPayload = """
