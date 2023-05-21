@@ -110,7 +110,7 @@ pipeline {
                 """
 
                 // Create Jira issue using REST API
-                sh "curl -u sebastian.stemmer@dig-it-up.de:c2ViYXN0aWFuLnN0ZW1tZXJAZGlnLWl0LXVwLmRlOmFaeUQ3NE9sbDJXT1h3ZmJZVUxu -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic ${base64token}' --data '${jiraPayload}' ${jiraBaseUrl}/rest/api/3/issue/"
+                sh "curl -u sebastian.stemmer@dig-it-up.de:ATATT3xFfGF0nncyIODyPNtkV4xF9Cqd4cjBof4dfyjhes0oXx7hV3TCJ3UWaKPGzPCQeGFNQ02YHGPkSWzXKll_lTkzELFXE6r2hkOtVRBzEamngLDkyWFF7dAKuC36tsEAauCr5Hp0wl6ekwBqy85XQZHGdzu6Oza6fk8sW00gXw7EOQZokvs=7B45B7B3 -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic ${base64token}' --data '${jiraPayload}' ${jiraBaseUrl}/rest/api/3/issue/"
             }
         }
         success {
