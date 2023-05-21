@@ -83,7 +83,6 @@ def cleanUp() {
                     script: "aws ecr list-images --repository-name ${repositoryName} --query 'imageIds[].imageDigest' --output text",
                     returnStdout: true
                 ).trim().split('\n')
-                echo imageIds
 
                 // Delete images except the one uploaded earlier
                 imageIds.each { imageId ->
