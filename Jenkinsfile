@@ -99,7 +99,7 @@ pipeline {
                             "id": "${jiraAssignee}"
                         },
                         "issuetype": {
-                            "namide": "${jiraIssueType}"
+                            "id": "${jiraIssueType}"
                         },
                         "project": {
                             "id": "${jiraProjectKey}"
