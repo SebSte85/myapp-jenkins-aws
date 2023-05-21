@@ -82,7 +82,7 @@ def cleanUp() {
                 def imageIds = sh(
                     script: "aws ecr describe-images --repository-name ${repositoryName} --query 'imageDetails[].imageDigest' --output text",
                     returnStdout: true
-                ).trim().split('\n')
+                ).trim().split('')
 
                 // Delete images except the one uploaded earlier
                 new groovy.json.JsonSlurper().parseText(imageIds).each { image ->
