@@ -88,13 +88,15 @@ pipeline {
                 def jiraIssueType = 'Bug'
                 def jiraSummary = "Pipeline failed for ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
                 def jiraDescription = "Pipeline failed for ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
+                def jiraAssignee = '605aefb29620b5006afbc585'
+                def base64token = aZyD74Oll2WOXwfbYULn.bytes.encodeBase64().toString()
 
                 // Create Jira issue payload
                 def jiraPayload = """
                 {
                     "fields": {
                         "assignee": {
-                            "id": "605aefb29620b5006afbc585"
+                            "id": "${jiraAssignee}"
                         },
                         "project": {
                             "key": "${jiraProjectKey}"
@@ -109,7 +111,7 @@ pipeline {
                 """
 
                 // Create Jira issue using REST API
-                sh "curl -u sebastian.stemmer@dig-it-up.de:aZyD74Oll2WOXwfbYULn -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --data '${jiraPayload}' ${jiraBaseUrl}/rest/api/3/issue/"
+                sh "curl -u sebastian.stemmer@dig-it-up.de:aZyD74Oll2WOXwfbYULn -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic ${base64token}' --data '${jiraPayload}' ${jiraBaseUrl}/rest/api/3/issue/"
             }
         }
         success {
