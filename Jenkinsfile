@@ -82,17 +82,21 @@ pipeline {
             script {
                 emailext body: "The pipeline execution failed due to...${env.ERROR_MESSAGE}", subject: "Job '${JOB_NAME} ${BUILD_NUMBER} execution FAILED'", to: 'sebby.stem@googlemail.com'
 
-                // Jira configuration
-                def jiraBaseUrl = 'https://digitup.atlassian.net/'
-                def jiraProjectKey = '10001'
-                def jiraIssueType = '10004'
-                def jiraSummary = "Pipeline failed for ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
-                // def jiraDescription = "Pipeline failed for ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
-                def jiraAssignee = '605aefb29620b5006afbc585'
-                def base64token = 'c2ViYXN0aWFuLnN0ZW1tZXJAZGlnLWl0LXVwLmRlOkFUQVRUM3hGZkdGMG5uY3lJT0R5UE50a1Y0eEY5Q3FkNGNqQm9mNGRmeWpoZXMwb1h4N2hWM1RDSjNVV2FLUEd6UENRZUdGTlEwMllIR1BrU1d6WEtsbF9sVGt6RUxGWEU2cjJoa090VlJCekVhbW5nTERreVdGRjdkQUt1QzM2dHNFQWF1Q3I1SHAwd2w2ZWt3QnF5ODVYUVpIR2R6dTZPemE2Zms4c1cwMGdYdzdFT1Fab2t2cz03QjQ1QjdCMw=='
+                // Get secret credentials from jenkins for secret text
+                withCredentials([string(credentialsId: 'jira-jenkins-token', variable: 'SECRET_TEXT')]) {
+                    echo 'JIRA-API token fetched...'
 
-                // Create Jira issue payload
-                def jiraPayload = """
+                    // Jira configuration
+                    def jiraBaseUrl = 'https://digitup.atlassian.net/'
+                    def jiraProjectKey = '10001'
+                    def jiraIssueType = '10004'
+                    def jiraSummary = "Pipeline failed for ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
+                    // def jiraDescription = "Pipeline failed for ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
+                    def jiraAssignee = '605aefb29620b5006afbc585'
+                    def base64token = 'c2ViYXN0aWFuLnN0ZW1tZXJAZGlnLWl0LXVwLmRlOkFUQVRUM3hGZkdGMG5uY3lJT0R5UE50a1Y0eEY5Q3FkNGNqQm9mNGRmeWpoZXMwb1h4N2hWM1RDSjNVV2FLUEd6UENRZUdGTlEwMllIR1BrU1d6WEtsbF9sVGt6RUxGWEU2cjJoa090VlJCekVhbW5nTERreVdGRjdkQUt1QzM2dHNFQWF1Q3I1SHAwd2w2ZWt3QnF5ODVYUVpIR2R6dTZPemE2Zms4c1cwMGdYdzdFT1Fab2t2cz03QjQ1QjdCMw=='
+
+                    // Create Jira issue payload
+                    def jiraPayload = """
                 {
                     "fields": {
                         "assignee": {
@@ -109,8 +113,9 @@ pipeline {
                 }
                 """
 
-                // Create Jira issue using REST API
-                sh "curl -u sebastian.stemmer@dig-it-up.de:ATATT3xFfGF0nncyIODyPNtkV4xF9Cqd4cjBof4dfyjhes0oXx7hV3TCJ3UWaKPGzPCQeGFNQ02YHGPkSWzXKll_lTkzELFXE6r2hkOtVRBzEamngLDkyWFF7dAKuC36tsEAauCr5Hp0wl6ekwBqy85XQZHGdzu6Oza6fk8sW00gXw7EOQZokvs=7B45B7B3 -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic ${base64token}' --data '${jiraPayload}' ${jiraBaseUrl}/rest/api/3/issue/"
+                    // Create Jira issue using REST API
+                    sh "curl -u sebastian.stemmer@dig-it-up.de:${env.SECRET_TEXT} -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Basic ${base64token}' --data '${jiraPayload}' ${jiraBaseUrl}/rest/api/3/issue/"
+                }
             }
         }
         success {
