@@ -80,7 +80,7 @@ def cleanUp() {
 
                 // Get a list of all image IDs in the repository
                 def imageIds = sh(
-                    script: "aws ecr list-images --repository-name ${repositoryName} --query 'imageIds[].imageDigest' --output text",
+                    script: "aws ecr describe-images --repository-name ${repositoryName} --query 'imageDetails[].imageDigest' --output text",
                     returnStdout: true
                 ).trim().split('\n')
 
