@@ -91,9 +91,8 @@ pipeline {
                     def jiraProjectKey = '10001'
                     def jiraIssueType = '10004'
                     def jiraSummary = "Pipeline failed for ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
-                    // def jiraDescription = "Pipeline failed for ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
+                    def jiraDescription = "Pipeline failed because of ${env.ERROR_MESSAGE}"
                     def jiraAssignee = '605aefb29620b5006afbc585'
-                    def base64token = 'c2ViYXN0aWFuLnN0ZW1tZXJAZGlnLWl0LXVwLmRlOkFUQVRUM3hGZkdGMFdZYWlXeWtNNmVtMVNPb282N3VySy1uWkFsZVNLZGVpQnRZaTd6SXZRSVV5Nko4OGVFSW1YU3BvTjg5TWRVSXdDZmU5aFpkelhUYVpVemR6cTJyQVViNW5XcF85S2s1aF8tOTB0NHJzM0hjRHllTE9wNFYzWE1ENW9zeF9oaEVzRVA4MVdMOW0yeHc3XzhncjA4WG9UNFJ0bTh0T0syRTFXZFI3Zy1MMWZrbz0wN0U3QUU4NA=='
 
                     // Create Jira issue payload
                     def jiraPayload = """
@@ -107,7 +106,7 @@ pipeline {
                                 {
                                     "content": [
                                         {
-                                            "text": "${env.ERROR_MESSAGE}",
+                                            "text": "${jiraDescription}",
                                             "type": "text"
                                         }
                                     ],
@@ -129,7 +128,7 @@ pipeline {
                 """
 
                     // Create Jira issue using REST API
-                    sh "curl -u sebastian.stemmer@dig-it-up.de:${env.SECRET_TEXT} -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --data '${jiraPayload}' ${jiraBaseUrl}/rest/api/3/issue/"
+                    sh 'curl -u sebastian.stemmer@dig-it-up.de:' + SECRET_TEXT + ' -X POST --header "Content-Type: application/json" --header "Accept: application/json" --data "' + jiraPayload + '" ' + jiraBaseUrl + '/rest/api/3/issue/'
                 }
             }
         }
