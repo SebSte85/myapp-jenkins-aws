@@ -4,7 +4,7 @@ def buildImage() {
     try {
         sh 'aws --version'
         sh "docker build -t $JOB_NAME:$BUILD_NUMBER ."
-        sh "docker tag $JOB_NAME:$BUILD_NUMBER public.ecr.aws/v8z9z5a4/$JOB_NAME:$BUILD_NUMBER"
+        sh "docker tag $JOB_NAME:$BUILD_NUMBER 681800194367.dkr.ecr.eu-central-1.amazonaws.com/$JOB_NAME:$BUILD_NUMBER"
     } catch (err) {
         echo 'Building image failed!'
         currentBuild.result = 'FAILURE'
@@ -38,7 +38,7 @@ def deployApp() {
     echo 'Deploying app...'
     try {
         // Deploy the app
-        sh "docker push public.ecr.aws/v8z9z5a4/$JOB_NAME:$BUILD_NUMBER"
+        sh "docker push 681800194367.dkr.ecr.eu-central-1.amazonaws.com/$JOB_NAME:$BUILD_NUMBER"
     } catch (err) {
         echo 'Deploying app failed!'
         currentBuild.result = 'FAILURE'
