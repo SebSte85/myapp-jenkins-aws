@@ -85,10 +85,13 @@ def cleanUp() {
                 ).trim().split('\n')
 
                 // Delete images except the one uploaded earlier
-                imageIds.each { imageId ->
-                    if (imageId != imageTag) {
-                    sh "aws ecr batch-delete-image --repository-name ${repositoryName} --image-ids imageDigest=${imageId}"
-                    }
+                new groovy.json.JsonSlurper().parseText(imageIds).each { image ->
+                def digest = image.Digest
+                def tags = image.Tags
+
+                if (tags != imageTag) {
+                    sh "aws ecr batch-delete-image --repository-name ${repositoryName} --image-ids imageDigest=${digest}"
+                }
                 }
             }
     } catch (err) {
