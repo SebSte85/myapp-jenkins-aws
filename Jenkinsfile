@@ -128,7 +128,7 @@ pipeline {
                 """
 
                     // Create Jira issue using REST API
-                    sh 'curl -u sebastian.stemmer@dig-it-up.de:' + SECRET_TEXT + ' -X POST --header "Content-Type: application/json" --header "Accept: application/json" --data "' + jiraPayload + '" ' + jiraBaseUrl + '/rest/api/3/issue/'
+                    sh "curl -u sebastian.stemmer@dig-it-up.de:'\${SECRET_TEXT}' -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --data '\${jiraPayload}' \${jiraBaseUrl}/rest/api/3/issue/"
                 }
             }
         }
