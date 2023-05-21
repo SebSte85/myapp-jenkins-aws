@@ -84,10 +84,10 @@ pipeline {
 
                 // Jira configuration
                 def jiraBaseUrl = 'https://digitup.atlassian.net/'
-                def jiraProjectKey = 'TJCAO'
-                def jiraIssueType = 'Bug'
+                def jiraProjectKey = '10001'
+                def jiraIssueType = '10004'
                 def jiraSummary = "Pipeline failed for ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
-                def jiraDescription = "Pipeline failed for ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
+                // def jiraDescription = "Pipeline failed for ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
                 def jiraAssignee = '605aefb29620b5006afbc585'
                 def base64token = 'c2ViYXN0aWFuLnN0ZW1tZXJAZGlnLWl0LXVwLmRlOmFaeUQ3NE9sbDJXT1h3ZmJZVUxu'
 
@@ -98,14 +98,13 @@ pipeline {
                         "assignee": {
                             "id": "${jiraAssignee}"
                         },
-                        "project": {
-                            "key": "${jiraProjectKey}"
-                        },
-                        "summary": "${jiraSummary}",
-                        "description": "${jiraDescription}",
                         "issuetype": {
-                            "name": "${jiraIssueType}"
+                            "namide": "${jiraIssueType}"
                         }
+                        "project": {
+                            "id": "${jiraProjectKey}"
+                        },
+                        "summary": "${jiraSummary}"
                     }
                 }
                 """
