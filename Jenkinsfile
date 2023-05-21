@@ -102,6 +102,21 @@ pipeline {
                         "assignee": {
                             "id": "${jiraAssignee}"
                         },
+                        "description": {
+                            "content": [
+                                {
+                                    "content": [
+                                        {
+                                            "text": "${env.ERROR_MESSAGE}",
+                                            "type": "text"
+                                        }
+                                    ],
+                                    "type": "paragraph"
+                                }
+                            ],
+                            "type": "doc",
+                            "version": 1
+                        },
                         "issuetype": {
                             "id": "${jiraIssueType}"
                         },
