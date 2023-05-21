@@ -100,7 +100,7 @@ pipeline {
                         },
                         "issuetype": {
                             "namide": "${jiraIssueType}"
-                        }
+                        },
                         "project": {
                             "id": "${jiraProjectKey}"
                         },
