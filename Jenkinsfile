@@ -1,4 +1,4 @@
-/* groovylint-disable LineLength */
+/* groovylint-disable LineLength, NestedBlockDepth */
 // Create a jenkinsfile with three stages, init, build and deploy
 
 pipeline {
@@ -8,7 +8,7 @@ pipeline {
         nodejs 'nodejs-12.22.12'
     }
     stages {
-        // First stage should be an init stage where a seperate groovy script is loaded
+        // This stage should be an init stage where a seperate groovy script is loaded
         stage('init...') {
             steps {
                 script {
@@ -16,7 +16,7 @@ pipeline {
                 }
             }
         }
-        // Second stage should be a build js stage where a buildJs function in the groovy script is called
+        // This stage should be a build js stage where a buildJs function in the groovy script is called
         stage('build bundle.js...') {
             steps {
                 dir('client') {
@@ -24,12 +24,22 @@ pipeline {
                     sh 'ls -l'
                     sh 'npm install'
                     sh 'npm run build'
-                    sh 'cd ..'
                 }
             }
         }
-        // Third stage should the build image stage where a buildImage function is called from the seperate groovy script
+        // This stage should run the frontend unit tests and check the code coverage
+        stage('run frontend tests...') {
+            steps {
+                    script {
+                        gv.runFrontendTests()
+                    }
+            }
+        }
+        // This stage should the build image stage where a buildImage function is called from the seperate groovy script
         stage('build image...') {
+            when {
+                expression { currentBuild.result != 'FAILURE' }
+            }
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
@@ -44,16 +54,22 @@ pipeline {
                 }
             }
         }
-        // Fourth stage should check if an app is running on port 3080 and if so terminate it
+        // This stage should check if an app is running on port 3080 and if so terminate it
         stage('check app...') {
+            when {
+                expression { currentBuild.result != 'FAILURE' }
+            }
             steps {
                 script {
                     gv.checkPort()
                 }
             }
         }
-        // In the fifth stage the app is deployed using the external deployApp method
+        // Here the app is deployed using the external deployApp method
         stage('deploy app...') {
+            when {
+                expression { currentBuild.result != 'FAILURE' }
+            }
             steps {
                 script {
                     def dockerCmd = "docker run -d -p 3080:3000 --name nodejsapp 681800194367.dkr.ecr.eu-central-1.amazonaws.com/$JOB_NAME:$BUILD_NUMBER"
@@ -64,8 +80,11 @@ pipeline {
                 }
             }
         }
-        // In the sixth stage the soapui tests are run inside a try catch block
+        // Here the soapui tests are run inside a try catch block
         stage('run soap tests...') {
+            when {
+                expression { currentBuild.result != 'FAILURE' }
+            }
             steps {
                 script {
                     gv.runSoapTests()
