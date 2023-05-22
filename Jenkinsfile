@@ -40,7 +40,9 @@ pipeline {
             }
             steps {
                 dir('client') {
-                    gv.buildBundle()
+                    script {
+                        gv.buildBundle()
+                    }
                 }
             }
         }
