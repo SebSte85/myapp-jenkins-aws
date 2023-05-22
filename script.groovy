@@ -2,17 +2,19 @@
 def runFrontendTests() {
     echo 'Running frontend tests...'
     try {
-        sh 'npm run test -- --coverage --watchAll=false'
+        dir('client') {
+            sh 'npm run test -- --coverage --watchAll=false'
 
-        // Read the code coverage report
-        def coverageReport = readFile('coverage/report.json')
-        def coverage = new groovy.json.JsonSlurperClassic().parseText(coverageReport)
-        def coveragePercentage = coverage.total.lines.pct
+            // Read the code coverage report
+            def coverageReport = readFile('coverage/report.json')
+            def coverage = new groovy.json.JsonSlurperClassic().parseText(coverageReport)
+            def coveragePercentage = coverage.total.lines.pct
 
-        if (coveragePercentage < 50) {
-            error('Code coverage is less than 50%. Exiting.')
+            if (coveragePercentage < 50) {
+                error('Code coverage is less than 50%. Exiting.')
+            }
+            sh 'cd ..'
         }
-        sh 'cd ..'
     } catch (err) {
         echo 'Frontend tests failed!'
         currentBuild.result = 'FAILURE'
