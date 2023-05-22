@@ -12,6 +12,20 @@ def runFrontendTests() {
         throw err
     }
 }
+def buildBundle() {
+    echo 'Building bundle.js...'
+    try {
+        sh 'pwd'
+        sh 'ls -l'
+        sh 'npm install'
+        sh 'npm run build'
+    } catch (err) {
+        echo 'Building bundle.js failed!'
+        currentBuild.result = 'FAILURE'
+        env.ERROR_MESSAGE = err.getMessage()
+        throw err
+    }
+}
 
 def buildImage() {
     echo 'Building image...'

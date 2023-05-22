@@ -15,19 +15,8 @@ pipeline {
                 }
             }
         }
-        // This stage should be a build js stage where a buildJs function in the groovy script is called
-        stage('build bundle.js...') {
-            steps {
-                dir('client') {
-                    sh 'pwd'
-                    sh 'ls -l'
-                    sh 'npm install'
-                    sh 'npm run build'
-                }
-            }
-        }
         // This stage should run the frontend unit tests and check the code coverage
-        stage('run frontend tests...') {
+        stage('run frontend unit tests...') {
             steps {
                     script {
                         gv.runFrontendTests()
@@ -41,6 +30,17 @@ pipeline {
                     withSonarQubeEnv('SonarCloud') {
                         echo 'Running SonarQube analysis...'
                     }
+                }
+            }
+        }
+        // This stage should be a build js stage where a buildJs function in the groovy script is called
+        stage('build bundle.js...') {
+            when {
+                expression { currentBuild.result != 'FAILURE' }
+            }
+            steps {
+                dir('client') {
+                    gv.buildBundle()
                 }
             }
         }
