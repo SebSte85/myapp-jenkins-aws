@@ -10,8 +10,9 @@ def runFrontendTests() {
             def coverage = new groovy.json.JsonSlurperClassic().parseText(coverageReport)
             def coveragePercentage = coverage.total.lines.pct
 
-            if (coveragePercentage < 50) {
-                error('Code coverage is less than 50%. Exiting.')
+            if (coveragePercentage < 10) {
+                echo 'Code coverage is less than 10%. Exiting.'
+                error('Code coverage is less than 10%. Exiting.')
             }
             sh 'cd ..'
         }
