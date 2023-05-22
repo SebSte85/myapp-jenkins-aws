@@ -38,7 +38,7 @@ pipeline {
         stage('sonarqube analysis...') {
             steps {
                 script {
-                    withSonarQubeEnv('SonarQube Scanner 4.8.0.2856') {
+                    withSonarQubeEnv('SonarCloud') {
                         echo 'Running SonarQube analysis...'
                     }
                 }
