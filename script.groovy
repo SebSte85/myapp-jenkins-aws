@@ -79,7 +79,7 @@ def runSoapTests() {
     echo 'Running soap tests...'
     // Run the soapui tests
     try {
-        sh '/opt/SmartBear/SoapUI-5.7.0/bin/testrunner.sh Tutorial-soapui-project.xml'
+        sh '/opt/SmartBear/SoapUI-5.7.0/bin/testrunner.sh -sTestSuite -cTestCase SOAP-REST-project.xml'
     } catch (err) {
         echo 'Soap tests failed!'
         currentBuild.result = 'FAILURE'
