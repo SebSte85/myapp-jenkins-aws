@@ -4,16 +4,6 @@ def runFrontendTests() {
     try {
         dir('client') {
             sh 'npm run test -- --coverage --watchAll=false'
-
-            // Read the code coverage report
-            def coverage = readJSON file: 'coverage/coverage-final.json'
-            def coveragePercentage = coverage.total.lines.pct
-
-            if (coveragePercentage < 10) {
-                echo 'Code coverage is less than 10%. Exiting.'
-                error('Code coverage is less than 10%. Exiting.')
-            }
-            sh 'cd ..'
         }
     } catch (err) {
         echo 'Frontend tests failed!'

@@ -6,6 +6,7 @@ pipeline {
     // Build tool should be javascript specific
     tools {
         nodejs 'nodejs-12.22.12'
+        sonarQubeScanner 'SonarScanner 4.8.0'
     }
     stages {
         // This stage should be an init stage where a seperate groovy script is loaded
@@ -33,6 +34,16 @@ pipeline {
                     script {
                         gv.runFrontendTests()
                     }
+            }
+        }
+        // This stages does a sonarqube analysis
+        stage('sonarqube analysis...') {
+            steps {
+                script {
+                    withSonarQubeEnv('SonarScanner 4.8.0') {
+                        sh 'npm run sonar'
+                    }
+                }
             }
         }
         // This stage should the build image stage where a buildImage function is called from the seperate groovy script
