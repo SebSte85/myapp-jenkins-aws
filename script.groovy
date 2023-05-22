@@ -6,8 +6,7 @@ def runFrontendTests() {
             sh 'npm run test -- --coverage --watchAll=false'
 
             // Read the code coverage report
-            def coverageReport = readFile('coverage/coverage-final.json')
-            def coverage = new groovy.json.JsonSlurperClassic().parseText(coverageReport)
+            def coverage = readJSON file: 'coverage/coverage-final.json'
             def coveragePercentage = coverage.total.lines.pct
 
             if (coveragePercentage < 10) {
