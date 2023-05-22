@@ -64,34 +64,6 @@ def cleanUp() {
     echo 'Cleaning up...'
     try {
         sh 'docker system prune -af'
-
-        // AWS credentials setup
-        withCredentials([
-                [
-                    $class: 'AmazonWebServicesCredentialsBinding',
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-                    credentialsId: 'AWS-Account'
-                ]
-            ]) {
-                // Get the repository name and image tag of the image uploaded earlier
-                def repositoryName = "$JOB_NAME"
-                def imageTag = "$BUILD_NUMBER"
-
-                // Get a list of all image IDs in the repository
-                def imageIds = sh(
-                    script: "aws ecr list-images --repository-name ${repositoryName} --query 'imageIds[].imageDigest' --output text",
-                    returnStdout: true
-                ).trim().split('\n')
-                echo imageIds
-
-                // Delete images except the one uploaded earlier
-                imageIds.each { imageId ->
-                    if (imageId != imageTag) {
-                    sh "aws ecr batch-delete-image --repository-name ${repositoryName} --image-ids imageDigest=${imageId}"
-                    }
-                }
-            }
     } catch (err) {
         echo 'Cleaning up failed!'
         currentBuild.result = 'FAILURE'
