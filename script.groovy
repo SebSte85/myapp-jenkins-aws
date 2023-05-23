@@ -39,7 +39,7 @@ def snykTest() {
     echo 'Running snyk test...'
     try {
         snykSecurity projectName: 'newapp-jenkins-aws-snyk', severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk-token'
-        // To cover frontend and backend snyk cli has to be available in the jenkins container
+    // To cover frontend and backend snyk cli has to be available in the jenkins container
     } catch (err) {
         echo 'Snyk test failed!'
         currentBuild.result = 'FAILURE'
@@ -51,9 +51,16 @@ def snykTest() {
 def buildImage() {
     echo 'Building image...'
     try {
-        sh 'aws --version'
-        sh "docker build -t $JOB_NAME:$BUILD_NUMBER ."
-        sh "docker tag $JOB_NAME:$BUILD_NUMBER 681800194367.dkr.ecr.eu-central-1.amazonaws.com/$JOB_NAME:$BUILD_NUMBER"
+        withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
+                    credentialsId: 'AWS-Account'
+                ]]) {
+                    sh 'aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 681800194367.dkr.ecr.eu-central-1.amazonaws.com'
+                    sh "docker build -t $JOB_NAME:$BUILD_NUMBER ."
+                    sh "docker tag $JOB_NAME:$BUILD_NUMBER 681800194367.dkr.ecr.eu-central-1.amazonaws.com/$JOB_NAME:$BUILD_NUMBER"
+                }
     } catch (err) {
         echo 'Building image failed!'
         currentBuild.result = 'FAILURE'

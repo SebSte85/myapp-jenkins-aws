@@ -15,8 +15,19 @@ pipeline {
                 }
             }
         }
+        // This stage runs a snyk test
+        stage('snyk security test...') {
+            steps {
+                script {
+                    gv.snykTest()
+                }
+            }
+        }
         // This stage should run the frontend unit tests and check the code coverage
         stage('run frontend unit tests...') {
+            when {
+                expression { currentBuild.result != 'FAILURE' }
+            }
             steps {
                     script {
                         gv.runFrontendTests()
@@ -25,6 +36,9 @@ pipeline {
         }
         // This stages does a sonarqube analysis
         stage('sonarqube analysis...') {
+            when {
+                expression { currentBuild.result != 'FAILURE' }
+            }
             steps {
                 script {
                     withSonarQubeEnv('SonarCloud') {
@@ -46,28 +60,12 @@ pipeline {
                 }
             }
         }
-        // This stage runs a snyk test
-        stage('snyk test...') {
-            steps {
-                script {
-                    gv.snykTest()
-                }
-            }
-        }
         // This stage should the build image stage where a buildImage function is called from the seperate groovy script
         stage('build image...') {
             when {
                 expression { currentBuild.result != 'FAILURE' }
             }
             steps {
-                withCredentials([[
-                    $class: 'AmazonWebServicesCredentialsBinding',
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-                    credentialsId: 'AWS-Account'
-                ]]) {
-                    sh 'aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 681800194367.dkr.ecr.eu-central-1.amazonaws.com'
-                }
                 script {
                     gv.buildImage()
                 }
