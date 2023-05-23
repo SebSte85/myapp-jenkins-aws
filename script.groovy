@@ -38,7 +38,7 @@ def buildBundle() {
 def snykTest() {
     echo 'Running snyk test...'
     try {
-        snykSecurity organisation: 'SebSte85', projectName: 'newapp-jenkins-aws-snyk', severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk-token', targetFile: '**/client/package.json'
+        snykSecurity organisation: 'SebSte85', projectName: 'newapp-jenkins-aws-snyk', severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk-token'
     } catch (err) {
         echo 'Snyk test failed!'
         currentBuild.result = 'FAILURE'
