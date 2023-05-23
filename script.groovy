@@ -12,13 +12,15 @@ def runFrontendTests() {
 
             // Evaluate the coverage report using the cobertura step
             echo 'Evaluating coverage report...'
-            def coverageReport = cobertura coberturaReportFile: '**/coverage/cobertura-coverage.xml'
-            def coveragePercentage = coverageReport.results.'@lineRate' * 100
+            def coverageReport = null
+            step([$class: 'CoberturaPublisher', coberturaReportFile: '**/coverage/cobertura-coverage.xml'])
+            coverageReport = cobertura 'coverageResult'
+            def coveragePercentage = coverageReport.results.'@lineRate' as float * 100
 
             if (coveragePercentage < 50) {
                 error('Code coverage is less than 50%. Stopping pipeline.')
-                }
             }
+        }
     } catch (err) {
         echo 'Frontend tests failed!'
         currentBuild.result = 'FAILURE'
