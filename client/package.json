@@ -40,5 +40,25 @@
   },
   "devDependencies": {
     "jest-junit": "^16.0.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!coverage/**",
+      "!node_modules/**",
+      "!src/index.js",
+      "!src/reportWebVitals.js",
+      "!src/setupTests.js",
+      "!public/**",
+      "!build/**"
+    ],
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "json",
+      "text",
+      "clover",
+      "cobertura"
+    ]
   }
 }

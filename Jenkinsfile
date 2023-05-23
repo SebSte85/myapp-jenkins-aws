@@ -87,7 +87,6 @@ pipeline {
                     }
                 }
             }
-        }
         // Here the soapui tests are run inside a try catch block
         stage('run soap tests...') {
             when {

@@ -3,8 +3,20 @@ def runFrontendTests() {
     echo 'Running frontend tests...'
     try {
         dir('client') {
+            // Generate the coverage report
             sh 'npm run test -- --coverage --watchAll=false'
-        }
+
+            // Publish the Cobertura coverage report
+            cobertura autoUpdateHealth: false, autoUpdateStability: false, conditionalCoverageTargets: '70, 0, 0', failUnhealthy: true, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
+
+            // Evaluate the coverage report using the cobertura step
+            def coverageReport = cobertura 'coverageResult'
+            def coveragePercentage = coverageReport.results.'@lineRate' * 100
+
+            if (coveragePercentage < 50) {
+                error('Code coverage is less than 50%. Stopping pipeline.')
+                }
+            }
     } catch (err) {
         echo 'Frontend tests failed!'
         currentBuild.result = 'FAILURE'
