@@ -38,18 +38,8 @@ def buildBundle() {
 def snykTest() {
     echo 'Running snyk test...'
     try {
-        // Install latest node version and then snyk cli
-        sh 'curl -sL https://deb.nodesource.com/setup_14.x | bash -'
-        sh 'apt-get install -y nodejs'
-        sh 'npm install -g snyk'
-
-        // snykSecurity projectName: 'newapp-jenkins-aws-snyk', severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk-token'
+        snykSecurity projectName: 'newapp-jenkins-aws-snyk', severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk-token'
         // To cover frontend and backend snyk cli has to be available in the jenkins container
-
-        // Run snyk test
-        withCredentials([string(credentialsId: 'snyk-token-secret-text', variable: 'SNYK_TOKEN')]) {
-            sh 'snyk test --severity-threshold=critical --all-projects --project-name=newapp-jenkins-aws-snyk'
-        }
     } catch (err) {
         echo 'Snyk test failed!'
         currentBuild.result = 'FAILURE'
