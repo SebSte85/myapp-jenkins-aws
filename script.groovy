@@ -8,7 +8,7 @@ def runFrontendTests() {
 
             // Publish the Cobertura coverage report
             echo 'Publishing coverage report...'
-            cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: '/var/jenkins_home/workspace/newapp-jenkins-aws/client//coverage/cobertura-coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
+            cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: '**/coverage/cobertura-coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
 
             // Evaluate the coverage report using the cobertura step
             echo 'Evaluating coverage report...'
