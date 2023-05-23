@@ -72,7 +72,7 @@ pipeline {
             }
         }
         // This stage should check if an app is running on port 3080 and if so terminate it
-        stage('check app...') {
+        stage('remove current app from port...') {
             when {
                 expression { currentBuild.result != 'FAILURE' }
             }
@@ -83,7 +83,7 @@ pipeline {
             }
         }
         // Here the app is deployed using the external deployApp method
-        stage('deploy app...') {
+        stage('deploy new app...') {
             when {
                 expression { currentBuild.result != 'FAILURE' }
             }
@@ -115,54 +115,7 @@ pipeline {
             script {
                 emailext body: "The pipeline execution failed due to...${env.ERROR_MESSAGE}", subject: "Job '${JOB_NAME} ${BUILD_NUMBER} execution FAILED'", to: 'sebby.stem@googlemail.com'
 
-                // Get secret credentials from jenkins for secret text
-                withCredentials([string(credentialsId: 'jira-jenkins-token', variable: 'SECRET_TEXT')]) {
-                    echo 'JIRA-API token fetched...'
-
-                    // Jira configuration
-                    def jiraBaseUrl = 'https://digitup.atlassian.net/'
-                    def jiraProjectKey = '10001'
-                    def jiraIssueType = '10004'
-                    def jiraSummary = "Pipeline failed for ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
-                    def jiraDescription = "Pipeline failed because of ${env.ERROR_MESSAGE}"
-                    def jiraAssignee = '605aefb29620b5006afbc585'
-
-                    // Create Jira issue payload
-                    def jiraPayload = """
-                {
-                    "fields": {
-                        "assignee": {
-                            "id": "${jiraAssignee}"
-                        },
-                        "description": {
-                            "content": [
-                                {
-                                    "content": [
-                                        {
-                                            "text": "${jiraDescription}",
-                                            "type": "text"
-                                        }
-                                    ],
-                                    "type": "paragraph"
-                                }
-                            ],
-                            "type": "doc",
-                            "version": 1
-                        },
-                        "issuetype": {
-                            "id": "${jiraIssueType}"
-                        },
-                        "project": {
-                            "id": "${jiraProjectKey}"
-                        },
-                        "summary": "${jiraSummary}"
-                    }
-                }
-                """
-
-                    // Create Jira issue using REST API
-                    sh "curl -u sebastian.stemmer@dig-it-up.de:${env.SECRET_TEXT} -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --data '${jiraPayload}' ${jiraBaseUrl}/rest/api/3/issue/"
-                }
+                gv.createJiraIssue()
             }
         }
         success {

@@ -132,4 +132,63 @@ def cleanUp() {
     }
 }
 
+def createJiraIssue() {
+    echo 'Creating Jira issue...'
+    try {
+        // Get secret credentials from jenkins for secret text
+        withCredentials([string(credentialsId: 'jira-jenkins-token', variable: 'SECRET_TEXT')]) {
+                    echo 'JIRA-API token fetched...'
+
+                    // Jira configuration
+                    def jiraBaseUrl = 'https://digitup.atlassian.net/'
+                    def jiraProjectKey = '10001'
+                    def jiraIssueType = '10004'
+                    def jiraSummary = "Pipeline failed for ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
+                    def jiraDescription = "Pipeline failed because of ${env.ERROR_MESSAGE}"
+                    def jiraAssignee = '605aefb29620b5006afbc585'
+
+                    // Create Jira issue payload
+                    def jiraPayload = """
+                {
+                    "fields": {
+                        "assignee": {
+                            "id": "${jiraAssignee}"
+                        },
+                        "description": {
+                            "content": [
+                                {
+                                    "content": [
+                                        {
+                                            "text": "${jiraDescription}",
+                                            "type": "text"
+                                        }
+                                    ],
+                                    "type": "paragraph"
+                                }
+                            ],
+                            "type": "doc",
+                            "version": 1
+                        },
+                        "issuetype": {
+                            "id": "${jiraIssueType}"
+                        },
+                        "project": {
+                            "id": "${jiraProjectKey}"
+                        },
+                        "summary": "${jiraSummary}"
+                    }
+                }
+                """
+
+                // Create Jira issue using REST API
+                sh "curl -u sebastian.stemmer@dig-it-up.de:${env.SECRET_TEXT} -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --data '${jiraPayload}' ${jiraBaseUrl}/rest/api/3/issue/"
+        }
+    } catch (err) {
+        echo 'Creating Jira issue failed!'
+        currentBuild.result = 'FAILURE'
+        env.ERROR_MESSAGE = err.getMessage()
+        throw err
+    }
+}
+
 return this
