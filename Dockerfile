@@ -1,5 +1,5 @@
 ## Build a Dockerfile for this project
-FROM node:12.18.3-alpine3.12
+FROM node:18-alpine
 
 WORKDIR /app
 
