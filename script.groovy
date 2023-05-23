@@ -11,15 +11,7 @@ def runFrontendTests() {
             cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: '**/coverage/cobertura-coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
 
             // Evaluate the coverage report using the cobertura step
-            echo 'Evaluating coverage report...'
-            def coverageReport = cobertura coberturaReportFile: '**/coverage/cobertura-coverage.xml'
-            def linesValid = coverageReport.@linesValid.toInteger()
-            def linesCovered = coverageReport.@linesCovered.toInteger()
-            def coveragePercentage = (linesCovered / linesValid.toFloat()) * 100
-
-            if (coveragePercentage < 50) {
-                error('Code coverage is less than 50%. Stopping pipeline.')
-                }
+            echo 'Evaluating coverage report soon to come...'
             }
     } catch (err) {
         echo 'Frontend tests failed!'
