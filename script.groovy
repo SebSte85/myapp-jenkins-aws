@@ -1,14 +1,3 @@
-def snykTest() {
-    echo 'Running snyk test...'
-    try {
-        snykSecurity organisation: 'SebSte85', projectName: 'newapp-jenkins-aws-snyk', severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk-token', targetFile: 'package.json'
-    } catch (err) {
-        echo 'Snyk test failed!'
-        currentBuild.result = 'FAILURE'
-        env.ERROR_MESSAGE = err.getMessage()
-        throw err
-    }
-}
 
 def runFrontendTests() {
     echo 'Running frontend tests...'
@@ -40,6 +29,18 @@ def buildBundle() {
         sh 'npm run build'
     } catch (err) {
         echo 'Building bundle.js failed!'
+        currentBuild.result = 'FAILURE'
+        env.ERROR_MESSAGE = err.getMessage()
+        throw err
+    }
+}
+
+def snykTest() {
+    echo 'Running snyk test...'
+    try {
+        snykSecurity organisation: 'SebSte85', projectName: 'newapp-jenkins-aws-snyk', severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk-token', targetFile: 'package.json'
+    } catch (err) {
+        echo 'Snyk test failed!'
         currentBuild.result = 'FAILURE'
         env.ERROR_MESSAGE = err.getMessage()
         throw err

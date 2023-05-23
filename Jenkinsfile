@@ -15,14 +15,6 @@ pipeline {
                 }
             }
         }
-        // This stage runs a snyk test
-        stage('snyk test...') {
-            steps {
-                script {
-                    gv.snykTest()
-                }
-            }
-        }
         // This stage should run the frontend unit tests and check the code coverage
         stage('run frontend unit tests...') {
             steps {
@@ -51,6 +43,14 @@ pipeline {
                     script {
                         gv.buildBundle()
                     }
+                }
+            }
+        }
+        // This stage runs a snyk test
+        stage('snyk test...') {
+            steps {
+                script {
+                    gv.snykTest()
                 }
             }
         }
