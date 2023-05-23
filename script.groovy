@@ -12,7 +12,7 @@ def runFrontendTests() {
 
             // Evaluate the coverage report using the cobertura step
             echo 'Evaluating coverage report soon to come...'
-            }
+        }
     } catch (err) {
         echo 'Frontend tests failed!'
         currentBuild.result = 'FAILURE'
@@ -38,7 +38,10 @@ def buildBundle() {
 def snykTest() {
     echo 'Running snyk test...'
     try {
-        snykSecurity projectName: 'newapp-jenkins-aws-snyk', severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk-token'
+        // snykSecurity projectName: 'newapp-jenkins-aws-snyk', severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk-token'
+        withCredentials([string(credentialsId: 'snyk-token-secret-text', variable: 'SNYK_TOKEN')]) {
+            sh 'snyk test --severity-threshold=critical --all-projects --project-name=newapp-jenkins-aws-snyk'
+        }
     } catch (err) {
         echo 'Snyk test failed!'
         currentBuild.result = 'FAILURE'
