@@ -12,9 +12,7 @@ def runFrontendTests() {
 
             // Evaluate the coverage report using the cobertura step
             echo 'Evaluating coverage report...'
-            def coverageReport = null
-            step([$class: 'CoberturaPublisher', coberturaReportFile: '**/coverage/cobertura-coverage.xml'])
-            coverageReport = cobertura 'coverageResult'
+            def coverageReport = cobertura coberturaReportFile: '**/coverage/cobertura-coverage.xml'
             def coveragePercentage = coverageReport.results.'@lineRate' * 100
 
             if (coveragePercentage < 50) {
