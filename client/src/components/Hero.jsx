@@ -16,6 +16,7 @@ const Hero = () => {
             <a
               href="https://www.linkedin.com/in/sebastian-stemmer-7551a2218/"
               target="_blank"
+              rel="noreferrer"
               className="rounded-full bg-sky-300 px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-sky-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300/50 active:bg-sky-500"
             >
               LinkedIn
@@ -23,6 +24,7 @@ const Hero = () => {
             <a
               href="https://www.freelancermap.de/freelancer-verzeichnis/profile/beratung-management/157025-profil-sebastian-stemmer-insurance-industry-expert-business-analyst-product-owner.html"
               target="_blank"
+              rel="noreferrer"
               className="rounded-full bg-slate-800 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50 active:text-slate-400"
             >
               Freelancermap
