@@ -5,14 +5,14 @@ import profil from "../images/Sebastian Stemmer 7 Profilbild.jpg";
 const Navbar = () => {
   return (
     <>
-      <div className="container sticky top-0 z-10 mx-auto flex h-14 items-center justify-between p-10 text-white backdrop-blur-lg">
+      <div className="container sticky top-0 z-10 mx-auto flex h-14 items-center justify-between p-10 text-white backdrop-blur-md">
         <img
           src={logo}
           alt="logo"
           className="h-8 w-8 rounded-full md:h-12 md:w-12"
         />
         <div className="text-lg font-bold lg:text-xl xl:text-2xl">
-          Showing off my skills
+          DigITup - Sebastian Stemmer
         </div>
         <img
           src={profil}
