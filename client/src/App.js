@@ -3,7 +3,7 @@ import "./index.css";
 
 function App() {
   return (
-    <div className="justify-center">
+    <div className="justify-center bg-gray-300">
       <Button />
     </div>
   );
