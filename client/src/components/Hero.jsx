@@ -34,88 +34,102 @@ const Hero = () => {
         </div>
         <div>
           <CodeblockFrame>
-            <div className="select-none border-r border-slate-300/5 pr-4 font-mono text-slate-600">
-              "01"
-              <br />
-              "02"
-              <br />
-              "03"
-              <br />
-              "04"
-              <br />
-              "05"
-              <br />
-              "06"
-              <br />
-              "07"
-              <br />
-              "08"
-              <br />
-              "09"
-              <br />
+            <div className="mt-4 flex space-x-2 text-xs">
+              <div className="flex h-6 rounded-full bg-gradient-to-r from-sky-400/30 via-sky-400 to-sky-400/30 p-px font-medium text-sky-300">
+                <div className="flex items-center rounded-full bg-slate-800 px-2.5">
+                  tailwind.config.js
+                </div>
+              </div>
+              <div className="flex h-6 rounded-full text-slate-300">
+                <div className="flex items-center rounded-full px-2.5">
+                  Navbar.jsx
+                </div>
+              </div>
             </div>
-            <pre className="prism-code language-javascript flex overflow-x-auto pb-6">
-              <code className="px-4">
-                <div className="">
-                  <span className="text-green-400">module</span>
-                  <span className="text-purple-400">.</span>
-                  <span className="text-green-400">exports</span>
-                  <span> </span>
-                  <span className="text-purple-400">=</span>
-                  <span> </span>
-                  <span className="text-yellow-400">&#123;</span>
-                </div>
-                <div className="pl-4">
-                  <span>content:</span>
-                  <span> </span>
-                  <span className="text-purple-400">&#91;</span>
-                  <span>"</span>
-                  <span className="text-orange-300">
-                    ./src/**/*.&#123;js,jsx&#125;
-                  </span>
-                  <span>"</span>
-                  <span className="text-purple-400">&#93;</span>
-                  <span>,</span>
-                </div>
-                <div className="pl-4">
-                  <span>darkMode:</span>
-                  <span> </span>
-                  <span>"</span>
-                  <span className="text-orange-300">class</span>
-                  <span>",</span>
-                </div>
-                <div className="pl-4">
-                  <span>theme:</span>
-                  <span> </span>
-                  <span className="text-purple-400">&#123;</span>
-                </div>
-                <div className="pl-8">
-                  <span>fontSize:</span>
-                  <span> </span>
-                  <span className="text-blue-400">&#123;</span>
-                </div>
-                <div className="pl-12">
-                  <span>xl:</span>
-                  <span> </span>
-                  <span className="text-yellow-400">&#91;</span>
-                  <span>"</span>
-                  <span className="text-orange-300">1.125rem</span>
-                  <span>"</span>
-                  <span className="text-yellow-400">&#93;</span>
-                </div>
-                <div className="pl-8">
-                  <span className="text-blue-400">&#125;</span>
-                  <span>,</span>
-                </div>
-                <div className="pl-4">
-                  <span className="text-purple-400">&#125;</span>
-                  <span>,</span>
-                </div>
-                <div>
-                  <span className="text-yellow-400">&#125;</span>
-                </div>
-              </code>
-            </pre>
+            <div className="mt-6 flex items-start px-1 text-sm">
+              <div className="select-none border-r border-slate-300/5 pr-4 font-mono text-slate-600">
+                "01"
+                <br />
+                "02"
+                <br />
+                "03"
+                <br />
+                "04"
+                <br />
+                "05"
+                <br />
+                "06"
+                <br />
+                "07"
+                <br />
+                "08"
+                <br />
+                "09"
+                <br />
+              </div>
+              <pre className="prism-code language-javascript flex overflow-x-auto pb-6">
+                <code className="px-4">
+                  <div className="">
+                    <span className="text-green-400">module</span>
+                    <span className="text-purple-400">.</span>
+                    <span className="text-green-400">exports</span>
+                    <span> </span>
+                    <span className="text-purple-400">=</span>
+                    <span> </span>
+                    <span className="text-yellow-400">&#123;</span>
+                  </div>
+                  <div className="pl-4">
+                    <span>content:</span>
+                    <span> </span>
+                    <span className="text-purple-400">&#91;</span>
+                    <span>"</span>
+                    <span className="text-orange-300">
+                      ./src/**/*.&#123;js,jsx&#125;
+                    </span>
+                    <span>"</span>
+                    <span className="text-purple-400">&#93;</span>
+                    <span>,</span>
+                  </div>
+                  <div className="pl-4">
+                    <span>darkMode:</span>
+                    <span> </span>
+                    <span>"</span>
+                    <span className="text-orange-300">class</span>
+                    <span>",</span>
+                  </div>
+                  <div className="pl-4">
+                    <span>theme:</span>
+                    <span> </span>
+                    <span className="text-purple-400">&#123;</span>
+                  </div>
+                  <div className="pl-8">
+                    <span>fontSize:</span>
+                    <span> </span>
+                    <span className="text-blue-400">&#123;</span>
+                  </div>
+                  <div className="pl-12">
+                    <span>xl:</span>
+                    <span> </span>
+                    <span className="text-yellow-400">&#91;</span>
+                    <span>"</span>
+                    <span className="text-orange-300">1.125rem</span>
+                    <span>"</span>
+                    <span className="text-yellow-400">&#93;</span>
+                  </div>
+                  <div className="pl-8">
+                    <span className="text-blue-400">&#125;</span>
+                    <span>,</span>
+                  </div>
+                  <div className="pl-4">
+                    <span className="text-purple-400">&#125;</span>
+                    <span>,</span>
+                  </div>
+                  <div>
+                    <span className="text-yellow-400">&#125;</span>
+                  </div>
+                </code>
+              </pre>
+            </div>
           </CodeblockFrame>
         </div>
       </div>
