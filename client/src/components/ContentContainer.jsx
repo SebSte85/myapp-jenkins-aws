@@ -6,10 +6,8 @@ const ContentContainer = () => {
       <div className="min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none lg:pl-8 lg:pr-0 xl:px-16">
         <article>
           <header className="mb-9 space-y-1">
-            <p className="font-display text-sm font-medium text-sky-500">
-              Introduction
-            </p>
-            <h1 className="font-display text-3xl tracking-tight text-slate-900 dark:text-white">
+            <p className="text-sm font-medium text-sky-500">Introduction</p>
+            <h1 className="text-3xl tracking-tight text-slate-900 dark:text-white">
               Getting Started
             </h1>
           </header>

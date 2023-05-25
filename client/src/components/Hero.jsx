@@ -6,7 +6,7 @@ const Hero = () => {
     <>
       <div className="grid grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-20 text-white lg:grid-cols-2 lg:px-8 xl:gap-x-16 xl:px-12">
         <div>
-          <p className="font-display inline bg-gradient-to-r from-indigo-200 via-sky-400 to-indigo-200 bg-clip-text text-5xl tracking-tight text-transparent">
+          <p className="inline bg-gradient-to-r from-indigo-200 via-sky-400 to-indigo-200 bg-clip-text text-5xl tracking-tight text-transparent">
             Wonderful world of technology
           </p>
           <p className="mt-3 text-2xl tracking-tight text-slate-400">
@@ -67,7 +67,7 @@ const Hero = () => {
                 "09"
                 <br />
               </div>
-              <pre className="prism-code language-javascript flex overflow-x-auto pb-6">
+              <pre className="flex overflow-x-auto pb-6">
                 <code className="px-4">
                   <div className="">
                     <span className="text-green-400">module</span>
