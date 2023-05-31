@@ -22,30 +22,28 @@ const Sidebar = () => {
                 </h2>
                 <ul className="mt-2 space-y-2 border-l-2 border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-400">
                   <li className="relative">
-                    <a
-                      href="#"
+                    <button
                       onClick={() => dispatch(changePage("Who am I"))}
-                      className={`block w-full pl-3.5 ${
+                      className={`block pl-3.5 ${
                         sitename === "Who am I"
                           ? "font-bold text-sky-500 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full before:bg-sky-500"
                           : " dark:text-slate-400"
                       }  `}
                     >
                       Who am I?
-                    </a>
+                    </button>
                   </li>
                   <li className="relative">
-                    <a
-                      href="#"
+                    <button
                       onClick={() => dispatch(changePage("Overview"))}
-                      className={`block w-full pl-3.5 ${
+                      className={`block pl-3.5 ${
                         sitename === "Overview"
                           ? "font-bold text-sky-500 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full before:bg-sky-500"
                           : " dark:text-slate-400"
                       }  `}
                     >
                       Overview
-                    </a>
+                    </button>
                   </li>
                 </ul>
               </li>
@@ -57,56 +55,52 @@ const Sidebar = () => {
                 </h2>
                 <ul className="mt-2 space-y-2 border-l-2 border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-400">
                   <li className="relative">
-                    <a
-                      href="#"
+                    <button
                       onClick={() => dispatch(changePage("React"))}
-                      className={`block w-full pl-3.5 ${
+                      className={`block  pl-3.5 ${
                         sitename === "React"
                           ? "font-bold text-sky-500 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full before:bg-sky-500"
                           : " dark:text-slate-400"
                       }  `}
                     >
                       React
-                    </a>
+                    </button>
                   </li>
                   <li className="relative">
-                    <a
-                      href="#"
+                    <button
                       onClick={() => dispatch(changePage("Tailwind"))}
-                      className={`block w-full pl-3.5 ${
+                      className={`block  pl-3.5 ${
                         sitename === "Tailwind"
                           ? "font-bold text-sky-500 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full before:bg-sky-500"
                           : " dark:text-slate-400"
                       }  `}
                     >
                       Tailwind CSS
-                    </a>
+                    </button>
                   </li>
                   <li className="relative">
-                    <a
-                      href="#"
+                    <button
                       onClick={() => dispatch(changePage("Redux"))}
-                      className={`block w-full pl-3.5 ${
+                      className={`block  pl-3.5 ${
                         sitename === "Redux"
                           ? "font-bold text-sky-500 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full before:bg-sky-500"
                           : " dark:text-slate-400"
                       }  `}
                     >
                       Redux Toolkit
-                    </a>
+                    </button>
                   </li>
                   <li className="relative">
-                    <a
-                      href="#"
+                    <button
                       onClick={() => dispatch(changePage("Testing"))}
-                      className={`block w-full pl-3.5 ${
+                      className={`block  pl-3.5 ${
                         sitename === "Testing"
                           ? "font-bold text-sky-500 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full before:bg-sky-500"
                           : " dark:text-slate-400"
                       }  `}
                     >
                       React Testing Library
-                    </a>
+                    </button>
                   </li>
                 </ul>
               </li>
@@ -118,8 +112,7 @@ const Sidebar = () => {
                 </h2>
                 <ul className="mt-2 space-y-2 border-l-2 border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-400">
                   <li className="relative">
-                    <a
-                      href="#"
+                    <button
                       onClick={() => dispatch(changePage("Jenkins"))}
                       className={`block w-full pl-3.5 ${
                         sitename === "Jenkins"
@@ -128,11 +121,10 @@ const Sidebar = () => {
                       }  `}
                     >
                       Jenkins
-                    </a>
+                    </button>
                   </li>
                   <li className="relative">
-                    <a
-                      href="#"
+                    <button
                       onClick={() => dispatch(changePage("Docker"))}
                       className={`block w-full pl-3.5 ${
                         sitename === "Docker"
@@ -141,46 +133,43 @@ const Sidebar = () => {
                       }  `}
                     >
                       Docker
-                    </a>
+                    </button>
                   </li>
                   <li className="relative">
-                    <a
-                      href="#"
+                    <button
                       onClick={() => dispatch(changePage("Sonarqube"))}
-                      className={`block w-full pl-3.5 ${
+                      className={`block  pl-3.5 ${
                         sitename === "Sonarqube"
                           ? "font-bold text-sky-500 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full before:bg-sky-500"
                           : " dark:text-slate-400"
                       }  `}
                     >
                       Sonarqube
-                    </a>
+                    </button>
                   </li>
                   <li className="relative">
-                    <a
-                      href="#"
+                    <button
                       onClick={() => dispatch(changePage("Soap"))}
-                      className={`block w-full pl-3.5 ${
+                      className={`block  pl-3.5 ${
                         sitename === "Soap"
                           ? "font-bold text-sky-500 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full before:bg-sky-500"
                           : " dark:text-slate-400"
                       }  `}
                     >
                       SoapUI
-                    </a>
+                    </button>
                   </li>
                   <li className="relative">
-                    <a
-                      href="#"
+                    <button
                       onClick={() => dispatch(changePage("Snyke"))}
-                      className={`block w-full pl-3.5 ${
+                      className={`block  pl-3.5 ${
                         sitename === "Snyke"
                           ? "font-bold text-sky-500 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full before:bg-sky-500"
                           : " dark:text-slate-400"
                       }  `}
                     >
                       Snyke
-                    </a>
+                    </button>
                   </li>
                 </ul>
               </li>
@@ -192,43 +181,40 @@ const Sidebar = () => {
                 </h2>
                 <ul className="mt-2 space-y-2 border-l-2 border-slate-100 dark:border-slate-800 lg:mt-4 lg:space-y-4 lg:border-slate-400">
                   <li className="relative">
-                    <a
-                      href="#"
+                    <button
                       onClick={() => dispatch(changePage("EC2"))}
-                      className={`block w-full pl-3.5 ${
+                      className={`block pl-3.5 ${
                         sitename === "EC2"
                           ? "font-bold text-sky-500 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full before:bg-sky-500"
                           : " dark:text-slate-400"
                       }  `}
                     >
                       EC2 Instance
-                    </a>
+                    </button>
                   </li>
                   <li className="relative">
-                    <a
-                      href="#"
+                    <button
                       onClick={() => dispatch(changePage("Route"))}
-                      className={`block w-full pl-3.5 ${
+                      className={`block  pl-3.5 ${
                         sitename === "Route"
                           ? "font-bold text-sky-500 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full before:bg-sky-500"
                           : " dark:text-slate-400"
                       }  `}
                     >
                       Route 53
-                    </a>
+                    </button>
                   </li>
                   <li className="relative">
-                    <a
-                      href="#"
+                    <button
                       onClick={() => dispatch(changePage("ECR"))}
-                      className={`block w-full pl-3.5 ${
+                      className={`block  pl-3.5 ${
                         sitename === "ECR"
                           ? "font-bold text-sky-500 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full before:bg-sky-500"
                           : " dark:text-slate-400"
                       }  `}
                     >
                       ECR
-                    </a>
+                    </button>
                   </li>
                 </ul>
               </li>

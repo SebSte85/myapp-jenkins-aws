@@ -6,26 +6,18 @@ const SubInstallation = () => {
       <ol className="mt-4 space-y-3 text-sm" data-testid="sub-installation">
         <li>
           <h3>
-            <a href="" className="text-sky-500">
-              Quick start
-            </a>
+            <button className="text-sky-500">Quick start</button>
           </h3>
           <ol className="mt-2 space-y-3 pl-5 text-slate-500 dark:text-slate-400">
             <li>
-              <a
-                href=""
-                className="hover:text-slate-600 dark:hover:text-slate-300"
-              >
+              <button className="hover:text-slate-600 dark:hover:text-slate-300">
                 Installing dependencies
-              </a>
+              </button>
             </li>
             <li>
-              <a
-                href=""
-                className="hover:text-slate-600 dark:hover:text-slate-300"
-              >
+              <button className="hover:text-slate-600 dark:hover:text-slate-300">
                 Configuring library
-              </a>
+              </button>
             </li>
           </ol>
         </li>
