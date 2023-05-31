@@ -12,7 +12,7 @@ const Submenu = () => {
           <h2 className="font-display text-sm font-medium text-slate-900 dark:text-white">
             On this page
           </h2>
-          {sitename === "Getting Started" ? (
+          {sitename === "Who am I" ? (
             <SubGettingStarted />
           ) : sitename === "Installation" ? (
             <SubInstallation />

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const navbarSlice = createSlice({
   name: "navbar",
-  initialState: { page: "Getting Started" },
+  initialState: { page: "Who am I" },
   reducers: {
     changePage: (state, action) => {
       state.page = action.payload;

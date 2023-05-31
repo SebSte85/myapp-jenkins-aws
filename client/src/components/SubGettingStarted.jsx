@@ -3,7 +3,7 @@ import React from "react";
 const SubGettingStarted = () => {
   return (
     <>
-      <ol className="mt-4 space-y-3 text-sm">
+      <ol className="mt-4 space-y-3 text-sm " data-testid="sub-getting-started">
         <li>
           <h3>
             <a href="" className="text-sky-500">

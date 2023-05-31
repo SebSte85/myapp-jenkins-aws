@@ -3,7 +3,7 @@ import React from "react";
 const SubInstallation = () => {
   return (
     <>
-      <ol className="mt-4 space-y-3 text-sm">
+      <ol className="mt-4 space-y-3 text-sm" data-testid="sub-installation">
         <li>
           <h3>
             <a href="" className="text-sky-500">
