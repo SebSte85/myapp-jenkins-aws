@@ -1,8 +1,16 @@
 import React from "react";
-import { ExclamationTriangleIcon, FolderIcon } from "@heroicons/react/24/solid";
+import {
+  ExclamationTriangleIcon,
+  FolderIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+} from "@heroicons/react/24/solid";
 import reacticon from "../images/React-icon.svg";
+import { useDispatch } from "react-redux";
+import { changePage } from "../store";
 
 const ReactContent = () => {
+  const dispatch = useDispatch();
   return (
     <>
       <article>
@@ -53,8 +61,8 @@ const ReactContent = () => {
         <p className="my-4 text-lg text-slate-700 dark:text-slate-400">
           Since this here is more or less a static website without any dynamic
           content, I could have used a static site generator like Gatsby or
-          Next.js. But I went with react anyway because I wanted to apply my
-          skills in a somewhat bigger project.
+          Next.js. But I went with react anyway because I am used to it, not
+          because it makes the most sense.
         </p>
         <h2 className="mt-4 text-2xl font-bold text-white">
           How do you start using it?
@@ -71,7 +79,7 @@ const ReactContent = () => {
         </pre>
         <p className="my-4 text-lg text-slate-700 dark:text-slate-400">
           This will create a new react app in your current directory with all
-          the necessary configurations to keep going.
+          the necessary configurations to start coding.
         </p>
         <p className="my-4 text-lg text-slate-700 dark:text-slate-400">
           As mid 2023, there are actually better ways to start things up with
@@ -121,6 +129,9 @@ const ReactContent = () => {
             </div>
             <div className="ml-4">
               <span className="text-green-300">&lt;/&gt;</span>
+            </div>
+            <div className="">
+              <span className="text-yellow-400">&#125;</span>
             </div>
             <div className="mt-4">
               <span className="text-purple-400">export default </span>
@@ -175,12 +186,100 @@ const ReactContent = () => {
             </div>
           </code>
         </pre>
+        <p className="my-4 text-lg text-slate-700 dark:text-slate-400">
+          A next step could be to have a seperate folder for your pages:
+        </p>
+        <pre className="my-4 rounded-lg bg-amber-50 p-4 dark:bg-slate-600/20 dark:ring-1 dark:ring-slate-300/10">
+          <code>
+            <div>
+              <span className="text-gray-300">
+                &darr;
+                <FolderIcon className="inline-block w-6 text-green-600" />
+              </span>
+              <span className="text-gray-400"> src</span>
+            </div>
+            <div className="ml-4 mt-2">
+              <span className="text-gray-300">
+                &darr;
+                <FolderIcon className="inline-block w-6 text-yellow-500 " />
+              </span>
+              <span className="text-gray-400"> components</span>
+            </div>
+            <div className="ml-10 mt-2">
+              <span className="flex items-center space-x-2 text-gray-400">
+                <img src={reacticon} alt="" className="h-4" />
+                <span className="inline-block">Navbar.jsx</span>
+              </span>
+              <span className="flex items-center space-x-2 text-gray-400">
+                <img src={reacticon} alt="" className="h-4" />
+                <span className="inline-block">Header.jsx</span>
+              </span>
+              <span className="flex items-center space-x-2 text-gray-400">
+                <img src={reacticon} alt="" className="h-4" />
+                <span className="inline-block">Footer.jsx</span>
+              </span>
+              <span className="flex items-center space-x-2 text-gray-400">
+                <span className="inline-block">...</span>
+              </span>
+            </div>
+            <div className="ml-4 mt-2">
+              <span className="text-gray-300">
+                &darr;
+                <FolderIcon className="inline-block w-6 text-red-500 " />
+              </span>
+              <span className="text-gray-400"> pages</span>
+            </div>
+            <div className="ml-10 mt-2">
+              <span className="flex items-center space-x-2 text-gray-400">
+                <img src={reacticon} alt="" className="h-4" />
+                <span className="inline-block">Home.jsx</span>
+              </span>
+              <span className="flex items-center space-x-2 text-gray-400">
+                <img src={reacticon} alt="" className="h-4" />
+                <span className="inline-block">Checkout.jsx</span>
+              </span>
+              <span className="flex items-center space-x-2 text-gray-400">
+                <span className="inline-block">...</span>
+              </span>
+            </div>
+          </code>
+        </pre>
+        <p className="my-4 text-lg text-slate-700 dark:text-slate-400">
+          Like I said, it all depends on the complexity of your app and your
+          personal preference.
+        </p>
         <h2 className="mt-4 text-2xl font-bold text-white">Next</h2>
         <p className="my-4 text-lg text-slate-700 dark:text-slate-400">
           Writing these react components is just the beginning. One thing you
           need to do is style them so they appear in your desired way. And that
           is what we will do in the next section.
         </p>
+        <div className="mt-16 flex justify-around">
+          <div className="flex space-x-4">
+            <ArrowLeftIcon className="w-8 text-white" />
+            <div className="space-y-2">
+              <button
+                className="text-lg font-bold dark:text-white"
+                onClick={() => dispatch(changePage("Overview"))}
+              >
+                Previous
+                <div className="font-medium dark:text-slate-400">Overview</div>
+              </button>
+            </div>
+          </div>
+          <div className="flex space-x-4">
+            <div className="space-y-2">
+              <button
+                className="text-lg font-bold dark:text-white"
+                onClick={() => dispatch(changePage("Tailwind"))}
+              >
+                Next
+                <div className="font-medium dark:text-slate-400">Tailwind</div>
+              </button>
+            </div>
+            <ArrowRightIcon className="w-8 text-white" />
+          </div>
+        </div>
       </article>
     </>
   );

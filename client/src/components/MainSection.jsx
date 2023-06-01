@@ -6,6 +6,7 @@ import Submenu from "./Submenu";
 import { useSelector } from "react-redux";
 import WhoAmIPage from "./WhoAmIPage";
 import Overview from "./Overview";
+import TailwindContent from "./TailwindContent";
 
 const MainSection = () => {
   const sitename = useSelector((state) => state.navbar.page);
@@ -20,6 +21,8 @@ const MainSection = () => {
             <Overview />
           ) : sitename === "React" ? (
             <ReactContent />
+          ) : sitename === "Tailwind" ? (
+            <TailwindContent />
           ) : null}
         </ContentContainer>
         <Submenu />

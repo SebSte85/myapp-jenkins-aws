@@ -1,9 +1,12 @@
 import React from "react";
-import { AcademicCapIcon } from "@heroicons/react/24/outline";
+import { AcademicCapIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import baloise from "../images/baloise logo.png";
 import talanx from "../images/talanx logo.png";
+import { useDispatch } from "react-redux";
+import { changePage } from "../store";
 
 const WhoAmIPage = () => {
+  const dispatch = useDispatch();
   return (
     <>
       <article>
@@ -63,6 +66,21 @@ const WhoAmIPage = () => {
           <img src={talanx} alt="" className="w-52" />
           <img src={baloise} alt="" className="w-52" />
           <img src={talanx} alt="" className="w-52" />
+        </div>
+        <div className="mt-16 flex justify-around">
+          <div className="flex space-x-4"></div>
+          <div className="flex space-x-4">
+            <div className="space-y-2">
+              <button
+                className="text-lg font-bold dark:text-white"
+                onClick={() => dispatch(changePage("Overview"))}
+              >
+                Next
+                <div className="font-medium dark:text-slate-400">Overview</div>
+              </button>
+            </div>
+            <ArrowRightIcon className="w-8 text-white" />
+          </div>
         </div>
       </article>
     </>

@@ -1,9 +1,16 @@
 import React from "react";
 import logos from "../images/Logos.png";
 import stages from "../images/Stages.png";
-import { ArrowRightCircleIcon } from "@heroicons/react/24/solid";
+import {
+  ArrowRightCircleIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+} from "@heroicons/react/24/solid";
+import { useDispatch } from "react-redux";
+import { changePage } from "../store";
 
 const Overview = () => {
+  const dispatch = useDispatch();
   return (
     <>
       <article>
@@ -69,6 +76,32 @@ const Overview = () => {
           For detailed information, navigate to the respective page in the left
           sidebar.
         </p>
+        <div className="mt-16 flex justify-around">
+          <div className="flex space-x-4">
+            <ArrowLeftIcon className="w-8 text-white" />
+            <div className="space-y-2">
+              <button
+                className="text-lg font-bold dark:text-white"
+                onClick={() => dispatch(changePage("Who am I"))}
+              >
+                Previous
+                <div className="font-medium dark:text-slate-400">Who am I</div>
+              </button>
+            </div>
+          </div>
+          <div className="flex space-x-4">
+            <div className="space-y-2">
+              <button
+                className="text-lg font-bold dark:text-white"
+                onClick={() => dispatch(changePage("React"))}
+              >
+                Next
+                <div className="font-medium dark:text-slate-400">React</div>
+              </button>
+            </div>
+            <ArrowRightIcon className="w-8 text-white" />
+          </div>
+        </div>
       </article>
     </>
   );
