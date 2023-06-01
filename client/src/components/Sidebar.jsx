@@ -114,7 +114,7 @@ const Sidebar = () => {
                   <li className="relative">
                     <button
                       onClick={() => dispatch(changePage("Jenkins"))}
-                      className={`block w-full pl-3.5 ${
+                      className={`block  pl-3.5 ${
                         sitename === "Jenkins"
                           ? "font-bold text-sky-500 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full before:bg-sky-500"
                           : " dark:text-slate-400"
@@ -126,7 +126,7 @@ const Sidebar = () => {
                   <li className="relative">
                     <button
                       onClick={() => dispatch(changePage("Docker"))}
-                      className={`block w-full pl-3.5 ${
+                      className={`block pl-3.5 ${
                         sitename === "Docker"
                           ? "font-bold text-sky-500 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full before:bg-sky-500"
                           : " dark:text-slate-400"

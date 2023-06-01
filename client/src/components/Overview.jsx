@@ -35,7 +35,10 @@ const Overview = () => {
         </p>
         <p className="my-4 text-lg text-slate-700 dark:text-slate-400">
           Take a look at the other chapters and I will explain a bit more what
-          these technologies do.
+          these technologies do. However, I am only scratching the surface here.
+          <p className="ml-1 inline-block font-bold">
+            So this is no in-depth explanation of all these tools.{" "}
+          </p>
         </p>
         <h2 className="mt-8 text-2xl font-bold text-white">Technologies</h2>
         <div>
@@ -63,7 +66,7 @@ const Overview = () => {
           </div>
         </ol>
         <p className="my-4 text-lg text-slate-700 dark:text-slate-400">
-          For detailed information, navigate to the respective page on the left
+          For detailed information, navigate to the respective page in the left
           sidebar.
         </p>
       </article>

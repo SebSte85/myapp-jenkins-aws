@@ -1,5 +1,6 @@
 import React from "react";
 import Sidebar from "./Sidebar";
+import ReactContent from "./ReactContent";
 import ContentContainer from "./ContentContainer";
 import Submenu from "./Submenu";
 import { useSelector } from "react-redux";
@@ -17,6 +18,8 @@ const MainSection = () => {
             <WhoAmIPage />
           ) : sitename === "Overview" ? (
             <Overview />
+          ) : sitename === "React" ? (
+            <ReactContent />
           ) : null}
         </ContentContainer>
         <Submenu />
