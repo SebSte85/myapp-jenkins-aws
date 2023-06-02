@@ -3,7 +3,8 @@ import Sidebar from "./Sidebar";
 import ReactContent from "./ReactContent";
 import ContentContainer from "./ContentContainer";
 import Submenu from "./Submenu";
-import Redux from "./ReduxContent";
+import ReduxContent from "./ReduxContent";
+import TestingContent from "./TestingContent";
 import { useSelector } from "react-redux";
 import WhoAmIPage from "./WhoAmIPage";
 import Overview from "./Overview";
@@ -25,7 +26,9 @@ const MainSection = () => {
           ) : sitename === "Tailwind" ? (
             <TailwindContent />
           ) : sitename === "Redux" ? (
-            <Redux />
+            <ReduxContent />
+          ) : sitename === "Testing" ? (
+            <TestingContent />
           ) : null}
         </ContentContainer>
         <Submenu />
