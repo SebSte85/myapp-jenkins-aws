@@ -196,7 +196,7 @@ const TailwindContent = () => {
         <p className="my-4 text-lg text-slate-700 dark:text-slate-400">
           And that's it! Now you can make use of all the utillity classes
           tailwind provides. Just go to your jsx component and add them right
-          there:
+          there in your className attribute:
         </p>
         <pre className="my-4 rounded-lg bg-amber-50 p-4 dark:bg-slate-600/20 dark:ring-1 dark:ring-slate-300/10">
           <code>
